@@ -8,7 +8,7 @@ schemes:
   - https
 basePath: /devonfw-server/services/rest
 paths:
-  '/sampledatamanagement/v1/sampledata/{id}/':
+  /sampledatamanagement/v1/sampledata/{id}/:
     get:
       summary: 'Delegates to {@link Sampledatamanagement#findSampleData}.'
       description: Get a SampleData by his ID.
