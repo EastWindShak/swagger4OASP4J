@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<access-control-schema>
+  <group id="ReadMasterData" type="group">
+    <permissions>
+      <!-- BEGIN ARCHETYPE SKIP -->
+      <!-- sampledatamanagement -->
+      <permission id="FindSampleData"/>
+      <!-- moredatamanagement -->
+      <permission id="FindMoreData"/>
+      <!-- END ARCHETYPE SKIP -->
+    </permissions>
+  </group>
+
+  <!-- BEGIN ARCHETYPE SKIP -->
+  <group id="Admin" type="role">
+    <inherits>
+      <group-ref>ReadMasterData</group-ref>
+    </inherits>
+    <permissions>
+      <!-- sampledatamanagement -->
+      <permission id="SaveSampleData"/>
+      <permission id="DeleteSampleData"/>
+      <!-- sampledatamanagement -->
+      <permission id="SaveMoreData"/>
+      <permission id="DeleteMoreData"/>
+    </permissions>
+  </group>
+  <!-- END ARCHETYPE SKIP -->
+</access-control-schema>
