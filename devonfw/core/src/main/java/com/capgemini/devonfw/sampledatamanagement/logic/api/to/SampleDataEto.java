@@ -18,6 +18,8 @@ public class SampleDataEto extends AbstractEto implements SampleData {
 
   private String mail;
 
+  /** Getters and Setters **/
+
   @Override
   public String getName() {
 

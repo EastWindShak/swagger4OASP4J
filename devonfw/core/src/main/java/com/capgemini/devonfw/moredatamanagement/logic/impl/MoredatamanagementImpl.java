@@ -27,10 +27,14 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 @Transactional
 public class MoredatamanagementImpl extends AbstractComponentFacade implements Moredatamanagement {
 
-  /** Logger instance. */
+  /**
+   * Logger instance.
+   */
   private static final Logger LOG = LoggerFactory.getLogger(MoredatamanagementImpl.class);
 
-  /** @see #getMoreDataDao() */
+  /**
+   * @see #getMoreDataDao()
+   */
   @Inject
   private MoreDataDao moreDataDao;
 
@@ -38,6 +42,7 @@ public class MoredatamanagementImpl extends AbstractComponentFacade implements M
    * The constructor.
    */
   public MoredatamanagementImpl() {
+
     super();
   }
 

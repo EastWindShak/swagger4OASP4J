@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<templatesConfiguration xmlns="http://capgemini.com/devonfw/cobigen/TemplatesConfiguration" version="2.1">
+	<templates>
+    	<templateExtension ref="${variables.entityName}Entity.java" mergeStrategy="javamerge"/>
+    	<templateExtension ref="${variables.entityName}.java"/>
+    	<templateExtension ref="${variables.entityName}Eto.java"/>
+    	<templateExtension ref="${variables.entityName}Cto.java"/>
+    	<templateExtension ref="${variables.entityName}Dao.java"/>
+    	<templateExtension ref="${variables.entityName}SearchCriteriaTo.java"/>
+    </templates>
+    <templateScans>
+    	<templateScan templatePath="templates" destinationPath="src/main"/>
+  	</templateScans>
+    <increments>
+        <increment name="testing" description="Testing">
+            <templateRef ref="${variables.entityName}Entity.java"/>
+            <templateRef ref="${variables.entityName}Eto.java"/>
+            <templateRef ref="${variables.entityName}Cto.java"/>
+            <templateRef ref="${variables.entityName}.java"/>
+            <templateRef ref="${variables.entityName}Dao.java"/>
+            <templateRef ref="${variables.entityName}SearchCriteriaTo.java"/>
+        </increment>
+    </increments>
+</templatesConfiguration>
