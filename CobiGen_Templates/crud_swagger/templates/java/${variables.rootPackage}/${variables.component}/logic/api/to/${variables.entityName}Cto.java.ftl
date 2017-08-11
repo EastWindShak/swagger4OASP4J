@@ -17,7 +17,7 @@ public class ${variables.entityName}Cto extends AbstractCto {
 
 <#list model.properties as property>
 <#if property.isEntity>
-   	private ${property.type}Eto ${property.name};
+   	private ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)?replace("Entity", "Eto")} ${property.name};
 </#if>
 </#list>
 
@@ -30,18 +30,15 @@ public class ${variables.entityName}Cto extends AbstractCto {
 	}
 
 <#list model.properties as property>
-<#if property.isEntity>
-	<#assign fieldCapName = property.name?cap_first>
-	<#assign newType = property.type + "Eto">
-	
-	public ${newType} <#if property.type='boolean'>is${fieldCapName}<#else>get${fieldCapName}</#if>() {
-		return ${property.name};
+	<#if property.isEntity>
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)?replace("Entity", "Eto")} get${property.name?cap_first}() {
+		return this.${property.name};
 	}
-
-	public void set${fieldCapName}(${newType} ${property.name}) {
+	
+	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)?replace("Entity", "Eto")} ${property.name}) {
 		this.${property.name} = ${property.name};
 	}
-</#if>
+	</#if>
+	
 </#list>
-
 }

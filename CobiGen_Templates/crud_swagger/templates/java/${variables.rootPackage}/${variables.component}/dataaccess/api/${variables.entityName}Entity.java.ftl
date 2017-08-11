@@ -7,6 +7,11 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+
 <#if model.description??>
 /**
  * ${model.description}
@@ -46,18 +51,42 @@ public class ${variables.entityName?cap_first}Entity extends ApplicationPersiste
 	@Size(max = ${property.constraints.maxLength}, min = ${property.constraints.minLength})	
 	</#if>
 	private ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)} ${property.name};
+	
 </#list>
 
 <#list model.properties as property>
-	@Override
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)} get${property.name?cap_first}() {
+		return this.${property.name};
+	}
+	
 	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)} ${property.name}) {
 		this.${property.name} = ${property.name};
 	}
 	
+</#list>
+
+<#list model.properties as property>
+	<#if !property.isCollection && property.isEntity>
 	@Override
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)} get${property.name?cap_first}() {
-		return this.${property.name};
+	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true)} ${property.name}Id) {
+		if (${property.name}Id == null) {
+          this.${property.name} = null;
+        } else {
+          ${property.type}Entity ${property.type?uncap_first}Entity = new ${property.type}Entity();
+          ${property.type?uncap_first}Entity.setId(${property.name}Id);
+          this.${property.name} = ${property.type?uncap_first}Entity;
+        }
 	}
+	
+	@Override
+	@Transient
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true)} get${property.name?cap_first}Id() {
+		if (this.${property.name} == null) {
+          return null;
+        }
+        return this.${property.name}.getId();
+	}
+	</#if>
 </#list>
 
 }
