@@ -339,15 +339,33 @@ public class OaspUtil {
         return fieldType;
     }
     
-    public String getOaspTypeFromOpenAPI(String type, String format, boolean isCollection, boolean isEntity, boolean withIdRef) {
+    public String getOaspTypeFromOpenAPI(String type, String format, boolean isCollection, boolean isEntity, boolean withIdRef, boolean simpleType) {
     	String typeConverted = null;
+    	if(format == null) {
+    		return "Timestamp";
+    	}
+    	if(type == null) {
+    		return "Date";
+    	}
     	if(format != null) {
     		if (type.equals("integer") && format.equals("int32")) {
-    			typeConverted =  "Integer";
+    			if(simpleType) {
+    				typeConverted = "int";
+    			} else {
+    				typeConverted =  "Integer";    				
+    			}
     		} else if (type.equals("number") && format.equals("double")) {
-    			typeConverted =  "Double";
+    			if(simpleType) {
+    				typeConverted = "double";
+    			} else {
+    				typeConverted =  "Double";    				
+    			}
     		} else if (type.equals("integer") && format.equals("int64")) {
-    			typeConverted =  "Long";
+    			if(simpleType) {
+    				typeConverted = "long";
+    			} else {
+    				typeConverted =  "Long";    				
+    			}
     		} else if (type.equals("string") && format.equals("date")) {
     			typeConverted =  "Date";
     		} else if (type.equals("string") && format.equals("date-time")) {
@@ -361,7 +379,11 @@ public class OaspUtil {
     		}
     	} else if (type != null) {
     		if (type.equals("boolean")) {
-    			typeConverted =  "Boolean";
+    			if(simpleType) {
+    				typeConverted = "boolean";
+    			} else {
+    				typeConverted =  "Boolean";    				
+    			}
     		} else if(type.equals("string")) {
     			typeConverted =  "String";
     		} else {
@@ -380,6 +402,36 @@ public class OaspUtil {
     		return "List<"+typeConverted+">";
     	} else {
     		return typeConverted;
+    	}
+    }
+    
+    public boolean commonCRUDOperation(String operationId, String entityName) {
+    	if(operationId.equals("find" + entityName) || operationId.equals("find" + entityName + "Etos")
+    	   || operationId.equals("delete" + entityName) || operationId.equals("save" + entityName)) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public String returnType(boolean isArray, boolean isPaginated, boolean isVoid, boolean isEntity, String type, String format) {
+    	String returnType = this.getOaspTypeFromOpenAPI(type, format, false, isEntity, false, false);
+    	if (isVoid) {
+    		return "void";
+    	}
+    	if(isArray){
+    		if(isEntity) {
+    			return "List<" + returnType + "Eto>";    			
+    		}else {
+    			return "List<" + returnType + ">";
+    		}
+    	} else if (isPaginated) {
+    		if (isEntity) {
+    			return "PaginatedListTo<" + returnType + "Eto>";
+    		} else {
+    			return "PaginatedListTo<" + returnType + ">";
+    		}
+    	} else {
+    		return returnType;
     	}
     }
 

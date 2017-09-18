@@ -40,18 +40,18 @@ public class ${variables.entityName}Eto extends AbstractEto implements ${variabl
 	<#elseif property.constraints.maxLength?? && property.constraints.minLength??>
 	@Size(max = ${property.constraints.maxLength}, min = ${property.constraints.minLength})	
 	</#if>
-	private ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true)} <#if property.isEntity>${property.name}Id<#else>${property.name}</#if>;
+	private ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true, false)} <#if property.isEntity>${property.name}Id<#else>${property.name}</#if>;
 	
 	</#if>
 </#list>
 
 <#list model.properties as property>
 	<#if !property.isCollection && !property.isEntity>
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)} get${property.name?cap_first}() {
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false, false)} get${property.name?cap_first}() {
 		return this.${property.name};
 	}
 	
-	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)} ${property.name}) {
+	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false, false)} ${property.name}) {
 		this.${property.name} = ${property.name};
 	}
 	</#if>
@@ -60,12 +60,12 @@ public class ${variables.entityName}Eto extends AbstractEto implements ${variabl
 <#list model.properties as property>
 	<#if !property.isCollection && property.isEntity>
 	@Override
-	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true)} ${property.name}Id) {
+	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true, false)} ${property.name}Id) {
 		this.${property.name}Id = ${property.name}Id;
 	}
 	
 	@Override
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true)} get${property.name?cap_first}Id() {
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true, false)} get${property.name?cap_first}Id() {
         return this.${property.name}Id;
 	}
 	<#else>

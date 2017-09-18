@@ -78,8 +78,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/SampleData'
       tags:
-      	- searchCriteria
-      	- paginated
+        - searchCriteria
+        - paginated
 components:
   schemas:
     SampleData:

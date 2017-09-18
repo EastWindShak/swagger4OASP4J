@@ -15,7 +15,7 @@ public class ${variables.entityName}SearchCriteriaTo extends SearchCriteriaTo {
   
 <#list model.properties as property>
 	<#if !property.isCollection>
-	private ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true)} <#if property.isEntity>${property.name}Id<#else>${property.name}</#if>;
+	private ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true, false)} <#if property.isEntity>${property.name}Id<#else>${property.name}</#if>;
 	</#if>
 </#list>
 
@@ -29,11 +29,11 @@ public class ${variables.entityName}SearchCriteriaTo extends SearchCriteriaTo {
 
 <#list model.properties as property>
 	<#if !property.isCollection && !property.isEntity>
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)} get${property.name?cap_first}() {
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false, false)} get${property.name?cap_first}() {
 		return this.${property.name};
 	}
 	
-	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false)} ${property.name}) {
+	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false, false)} ${property.name}) {
 		this.${property.name} = ${property.name};
 	}
 	</#if>
@@ -41,11 +41,11 @@ public class ${variables.entityName}SearchCriteriaTo extends SearchCriteriaTo {
 
 <#list model.properties as property>
 	<#if !property.isCollection && property.isEntity>
-	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true)} ${property.name}Id) {
+	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true, false)} ${property.name}Id) {
 		this.${property.name}Id = ${property.name}Id;
 	}
 	
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true)} get${property.name?cap_first}Id() {
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, true, false)} get${property.name?cap_first}Id() {
         return this.${property.name}Id;
 	}
 	<#else>
