@@ -13,7 +13,7 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 /**
  * The service implementation for REST calls in order to execute the logic of component {@link ${variables.component?cap_first}}.
  */
-@Named("SamplemanagementRestService")
+@Named("${variables.component?cap_first}RestService")
 public class ${variables.component?cap_first}RestServiceImpl implements ${variables.component?cap_first}RestService {
 
   @Inject
@@ -46,11 +46,31 @@ public class ${variables.component?cap_first}RestServiceImpl implements ${variab
   <#list model.component.paths as path>
 	<#list path.operations as operation>
 	    <#if !OaspUtil.commonCRUDOperation(operation.operationId, variables.entityName?cap_first)> 
-  			<#assign returnType = OaspUtil.returnType(operation.response.isArray, operation.response.isPaginated, operation.response.isVoid, operation.response.isEntity, operation.response.type, operation.response.format)>
+  			<#assign returnType = OaspUtil.returnType(operation.response)>
   @Override
-  public ${returnType?replace("Entity", "Eto")} ${operation.operationId}() {
+  public ${returnType?replace("Entity", "Eto")} ${operation.operationId}(
+  			<#list operation.parameters as parameter>
+  				<#if parameter.isSearchCriteria>
+  			${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}SearchCriteriaTo criteria<#if parameter?has_next>, </#if>
+  				<#elseif parameter.isEntity>
+  		  ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}Eto parameter.name?replace("Entity","")<#if parameter?has_next>, </#if>
+  		    <#else>
+  		  ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)} ${parameter.name}<#if parameter?has_next>, </#if>
+  		   	</#if>
+ 				</#list>
+  			) {
 
-    return this.${variables.component?lower_case}.${operation.operationId}();
+    return this.${variables.component?lower_case}.${operation.operationId}(
+    		<#list operation.parameters as parameter>
+  				<#if parameter.isSearchCriteria>
+  			criteria<#if parameter?has_next>, </#if>
+  				<#elseif parameter.isEntity>
+  		  parameter.name?replace("Entity","")<#if parameter?has_next>, </#if>
+  		   	<#else>
+  		  ${parameter.name}<#if parameter?has_next>, </#if>
+  		   	</#if>
+ 			</#list>
+ 			);
   }
   		</#if>
   	</#list>

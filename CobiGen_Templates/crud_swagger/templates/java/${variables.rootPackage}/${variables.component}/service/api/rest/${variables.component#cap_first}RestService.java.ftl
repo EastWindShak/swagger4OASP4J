@@ -76,11 +76,16 @@ public interface ${variables.component?cap_first}RestService {
   @DELETE
   			</#if>
   @Path("${path.pathURI}")
-  			<#assign returnType = OaspUtil.returnType(operation.response.isArray, operation.response.isPaginated, operation.response.isVoid, operation.response.isEntity, operation.response.type, operation.response.format)>
+  			<#assign returnType = OaspUtil.returnType(operation.response)>
   public ${returnType?replace("Entity", "Eto")} ${operation.operationId}(
     <#list operation.parameters as parameter>
+    	<#if parameter.inPath>
+    	@PathParam("${parameter.name}")
+    	</#if>
+    	${OaspUtil.getJAVAConstraint(parameter.constraints)}
+    	${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)} ${parameter.name}<#if parameter?has_next>, </#if>
     </#list>
-  	
+  	);
   		</#if>
   	</#list>
  </#list>

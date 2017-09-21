@@ -42,7 +42,7 @@ public interface ${variables.component?cap_first} {
 
   <#list model.component.paths as path>
   	<#list path.operations as operation>
-  		<#if !OaspUtil.commonCRUDOperation(operation.operationId, variables.entityName?cap_first)>
+  		<#if !OaspUtil.commonCRUDOperation(operation.operationId, variables.entityName)>
 	  		<#if operation.response.isPaginated>
 	  			<#if operation.response.isEntity>
   	PaginatedListTo<${operation.response.type}Eto> ${operation.operationId}(
@@ -65,14 +65,15 @@ public interface ${variables.component?cap_first} {
   				</#if>
   			</#if>
   			<#list operation.parameters as parameter>
-  				<#if parameter.isSearchCriteria>
-  			${OaspUtil.getOaspTypeFromOpenAPI(parameter.type, parameter.format, parameter.isCollection, parameter.isEntity, false, false)}SearchCriteriaTo criteria<#if parameter?has_next>, <#else>);</#if>
-  				<#elseif parameter.isEntity>
-  		    ${OaspUtil.getOaspTypeFromOpenAPI(parameter.type, parameter.format, parameter.isCollection, parameter.isEntity, false, false)}Eto parameter.name?replace("Entity","")<#if parameter?has_next>, <#else>);</#if>
+  					<#if parameter.isSearchCriteria>
+  			${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}SearchCriteriaTo criteria<#if parameter?has_next>, </#if>
+  					<#elseif parameter.isEntity>
+  		    ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}Eto parameter.name?replace("Entity","")<#if parameter?has_next>, </#if>
   		    	<#else>
-  		    ${OaspUtil.getOaspTypeFromOpenAPI(parameter.type, parameter.format, parameter.isCollection, parameter.isEntity, false, true)} ${parameter.name}<#if parameter?has_next>, <#else>);</#if>
+  		    ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)} ${parameter.name}<#if parameter?has_next>, </#if>
   		    	</#if>
-  			</#list>
+ 				</#list>
+ 				);
   		</#if>
   	</#list>
   </#list>

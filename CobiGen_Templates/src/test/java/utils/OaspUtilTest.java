@@ -1,6 +1,8 @@
 package utils;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -168,6 +170,16 @@ public class OaspUtilTest {
         field.put(Field.TYPE.toString(), "DeepEntity");
         assertEquals("deepEntityId",
             new OaspUtil().resolveIdVariableNameOrSetterGetterSuffix(clazz, field, true, false, "nomatch"));
+    }
+    
+    @Test
+    public void isCommonCrudOperation() throws Exception {
+
+    	assertTrue(new OaspUtil().commonCRUDOperation("findExample", "Example"));
+    	assertTrue(new OaspUtil().commonCRUDOperation("saveExample", "Example"));
+    	assertTrue(new OaspUtil().commonCRUDOperation("deleteExample", "Example"));
+    	assertTrue(new OaspUtil().commonCRUDOperation("findExampleEtos", "Example"));
+    	assertFalse(new OaspUtil().commonCRUDOperation("customOperation", "Example"));
     }
 
 }

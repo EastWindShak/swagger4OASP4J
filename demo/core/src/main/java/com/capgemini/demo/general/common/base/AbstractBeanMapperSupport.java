@@ -1,33 +1,24 @@
 package com.capgemini.demo.general.common.base;
 
-import io.oasp.module.beanmapping.common.api.BeanMapper;
-
 import javax.inject.Inject;
 
+import io.oasp.module.beanmapping.common.api.BeanMapper;
+
 /**
- * This abstract class provides {@link #getBeanMapper() access} to the {@link BeanMapper}.
- *
+ * This abstract class wraps advanced functionality according dozer mappings
  */
 public abstract class AbstractBeanMapperSupport {
 
-  /** @see #getBeanMapper() */
-  private BeanMapper beanMapper;
+	/** @see #getBeanMapper() */
+	@Inject
+	private BeanMapper beanMapper;
 
-  /**
-   * @param beanMapper is the {@link BeanMapper} to {@link Inject}
-   */
-  @Inject
-  public void setBeanMapper(BeanMapper beanMapper) {
+	/**
+	 * @return the {@link BeanMapper} instance.
+	 */
+	protected BeanMapper getBeanMapper() {
 
-    this.beanMapper = beanMapper;
-  }
-
-  /**
-   * @return the {@link BeanMapper} instance.
-   */
-  protected BeanMapper getBeanMapper() {
-
-    return this.beanMapper;
-  }
+		return this.beanMapper;
+	}
 
 }

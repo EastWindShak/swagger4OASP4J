@@ -16,41 +16,43 @@ import io.oasp.module.jpa.common.api.to.PaginationResultTo;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PaginatedListToWrapper<T> {
 
-  private PaginationResultTo pagination;
+	private PaginationResultTo pagination;
 
-  @XmlElement
-  private List<T> result;
+	@XmlElement
+	private List<T> result;
 
-  /**
-   * @return pagination
-   */
-  public PaginationResultTo getPagination() {
+	/**
+	 * @return pagination
+	 */
+	public PaginationResultTo getPagination() {
 
-    return this.pagination;
-  }
+		return this.pagination;
+	}
 
-  /**
-   * @return result
-   */
-  public List<T> getResult() {
+	/**
+	 * @return result
+	 */
+	public List<T> getResult() {
 
-    return this.result;
-  }
+		return this.result;
+	}
 
-  /**
-   * @param result new value of {@link #getresult}.
-   */
-  public void setResult(List<T> result) {
+	/**
+	 * @param result
+	 *            new value of {@link #getresult}.
+	 */
+	public void setResult(List<T> result) {
 
-    this.result = result;
-  }
+		this.result = result;
+	}
 
-  /**
-   * @param pagination new value of {@link #getpagination}.
-   */
-  public void setPagination(PaginationResultTo pagination) {
+	/**
+	 * @param pagination
+	 *            new value of {@link #getpagination}.
+	 */
+	public void setPagination(PaginationResultTo pagination) {
 
-    this.pagination = pagination;
-  }
+		this.pagination = pagination;
+	}
 
 }

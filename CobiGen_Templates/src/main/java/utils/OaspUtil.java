@@ -339,64 +339,70 @@ public class OaspUtil {
         return fieldType;
     }
     
-    public String getOaspTypeFromOpenAPI(String type, String format, boolean isCollection, boolean isEntity, boolean withIdRef, boolean simpleType) {
+    public String getOaspTypeFromOpenAPI(Map<String, Object> parameter, boolean withIdRef, boolean simpleType) {
     	String typeConverted = null;
-    	if(format == null) {
-    		return "Timestamp";
+    	String format = (String)parameter.get("format");
+    	String type = (String)parameter.get("type");
+    	boolean isCollection = false;
+    	if(parameter.get("isCollection") != null) {
+    		isCollection = (boolean)parameter.get("isCollection");    		
     	}
-    	if(type == null) {
-    		return "Date";
-    	}
-    	if(format != null) {
-    		if (type.equals("integer") && format.equals("int32")) {
-    			if(simpleType) {
-    				typeConverted = "int";
-    			} else {
-    				typeConverted =  "Integer";    				
-    			}
-    		} else if (type.equals("number") && format.equals("double")) {
-    			if(simpleType) {
-    				typeConverted = "double";
-    			} else {
-    				typeConverted =  "Double";    				
-    			}
-    		} else if (type.equals("integer") && format.equals("int64")) {
-    			if(simpleType) {
-    				typeConverted = "long";
-    			} else {
-    				typeConverted =  "Long";    				
-    			}
-    		} else if (type.equals("string") && format.equals("date")) {
-    			typeConverted =  "Date";
-    		} else if (type.equals("string") && format.equals("date-time")) {
-    			typeConverted =  "Timestamp";
-    		} else if (type.equals("string") && format.equals("binary")) {
-    			typeConverted =  "float";
-    		} else if (type.equals("string") && format.equals("email")) {
-    			typeConverted =  "String";
-    		} else if (type.equals("string") && format.equals("password")) {
-    			typeConverted =  "String";
-    		}
-    	} else if (type != null) {
-    		if (type.equals("boolean")) {
-    			if(simpleType) {
-    				typeConverted = "boolean";
-    			} else {
-    				typeConverted =  "Boolean";    				
-    			}
-    		} else if(type.equals("string")) {
-    			typeConverted =  "String";
+    	boolean isEntity = (boolean)parameter.get("isEntity");
+
+    	if(type != null) {
+    		if(format != null) {
+    			if (type.equals("integer") && format.equals("int32")) {
+    				if(simpleType) {
+    					typeConverted = "int";
+    				} else {
+    					typeConverted =  "Integer";    				
+    				}
+    			} else if (type.equals("number") && format.equals("double")) {
+    				if(simpleType) {
+    					typeConverted = "double";
+    				} else {
+    					typeConverted =  "Double";    				
+    				}
+    			} else if (type.equals("integer") && format.equals("int64")) {
+    				if(simpleType) {
+    					typeConverted = "long";
+    				} else {
+    					typeConverted =  "Long";    				
+    				}
+    			} else if (type.equals("string") && format.equals("date")) {
+    				typeConverted =  "Date";
+    			} else if (type.equals("string") && format.equals("date-time")) {
+    				typeConverted =  "Timestamp";
+    			} else if (type.equals("string") && format.equals("binary")) {
+    				typeConverted =  "float";
+    			} else if (type.equals("string") && format.equals("email")) {
+    				typeConverted =  "String";
+    			} else if (type.equals("string") && format.equals("password")) {
+    				typeConverted =  "String";
+    			}	
     		} else {
-	    		if(isEntity) {
-	    			if (withIdRef) {
-	    				typeConverted = "Long";
-	    			} else {
-	    				typeConverted = type + "Entity";    				    				
-	    			}
-	    		} else {
-	    			typeConverted = type;
-	    		}
+    			if (type.equals("boolean")) {
+    				if(simpleType) {
+    					typeConverted = "boolean";
+    				} else {
+    					typeConverted =  "Boolean";    				
+    				}
+    			} else if(type.equals("string")) {
+    				typeConverted =  "String";
+    			} else {
+    				if(isEntity) {
+    					if (withIdRef) {
+    						typeConverted = "Long";
+    					} else {
+    						typeConverted = type + "Entity";    				    				
+    					}
+    				} else {
+    					typeConverted = type;
+    				}
+    			}
     		}
+    	} else {
+    		return "void";
     	}
     	if (isCollection) {
     		return "List<"+typeConverted+">";
@@ -406,26 +412,30 @@ public class OaspUtil {
     }
     
     public boolean commonCRUDOperation(String operationId, String entityName) {
-    	if(operationId.equals("find" + entityName) || operationId.equals("find" + entityName + "Etos")
-    	   || operationId.equals("delete" + entityName) || operationId.equals("save" + entityName)) {
-    		return true;
+    	
+    	String opIdLowerCase = operationId.toLowerCase();
+    	String entityNameLowerCase = entityName.toLowerCase();
+    	if(opIdLowerCase.contains(entityNameLowerCase)){
+    		return opIdLowerCase.equals("find" + entityNameLowerCase) || opIdLowerCase.equals("find" + entityNameLowerCase + "etos")
+    				|| opIdLowerCase.equals("delete" + entityNameLowerCase) || opIdLowerCase.equals("save" + entityNameLowerCase);    		
+    	} else {
+    		return false;
     	}
-    	return false;
     }
     
-    public String returnType(boolean isArray, boolean isPaginated, boolean isVoid, boolean isEntity, String type, String format) {
-    	String returnType = this.getOaspTypeFromOpenAPI(type, format, false, isEntity, false, false);
-    	if (isVoid) {
+    public String returnType(Map<String, Object> response) {
+    	String returnType = this.getOaspTypeFromOpenAPI(response, false, false);
+    	if ((boolean)response.get("isVoid")) {
     		return "void";
     	}
-    	if(isArray){
-    		if(isEntity) {
+    	if((boolean)response.get("isArray")){
+    		if((boolean)response.get("isEntity")) {
     			return "List<" + returnType + "Eto>";    			
     		}else {
     			return "List<" + returnType + ">";
     		}
-    	} else if (isPaginated) {
-    		if (isEntity) {
+    	} else if ((boolean)response.get("isPaginated")) {
+    		if ((boolean)response.get("isEntity")) {
     			return "PaginatedListTo<" + returnType + "Eto>";
     		} else {
     			return "PaginatedListTo<" + returnType + ">";
@@ -433,6 +443,33 @@ public class OaspUtil {
     	} else {
     		return returnType;
     	}
+    }
+    
+    public String getJAVAConstraint(Map<String, Object> constraints) {
+    	
+    	String consts = "";
+    	if (constraints.get("maximum") != null) {
+    		consts = consts + "@Max("+ constraints.get("maximum") + ")";
+    	}
+    	if (constraints.get("minimum") != null) {
+    		consts = consts + "@Min("+ constraints.get("minimum") + ")";
+    	}
+    	if (constraints.get("maxLength") != null) {
+    		consts = consts  + "@Size(max=" + constraints.get("maxLength");
+    		if(constraints.get("minLength") != null) {
+    			consts = consts  + ", min=" + constraints.get("minLength");
+    		}
+    		consts = consts + ")";
+    	} else {
+    		if (constraints.get("minLength") != null) {
+    			consts = consts  + "@Size(min=" + constraints.get("minLength");
+    			if(constraints.get("maxLength") != null) {
+    				consts = consts  + ", max=" + constraints.get("maxLength");
+    			}
+    			consts = consts  + ")";
+    		}    		
+    	}
+    	return consts;
     }
 
 }

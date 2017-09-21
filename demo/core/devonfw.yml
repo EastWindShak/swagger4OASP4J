@@ -10,7 +10,7 @@ paths:
     get:
       summary: 'Delegates to {@link Sampledatamanagement#findSampleData}.'
       description: Get a SampleData by his ID.
-      operationId: getSample
+      operationId: findSampleData
       parameters:
         - name: id
           in: path
@@ -29,8 +29,8 @@ paths:
                 $ref: '#/components/schemas/SampleData'
     delete:
       summary: 'Delegates to {@link Sampledatamanagement#deleteSampleData}.'
-      description: Deletes an existen SampleData from his ID.
-      operationId: deleteSample
+      description: Deletes an existent SampleData from his ID.
+      operationId: deleteSampleData
       parameters:
         - name: id
           in: path
@@ -47,7 +47,7 @@ paths:
     post:
       summary: 'Delegates to {@link Sampledatamanagement#saveSampleData}.'
       description: Save a SampleData into de DB
-      operationId: saveSample
+      operationId: saveSampleData
       responses:
         '200':
           description: An SampleDataETO object.
@@ -65,7 +65,7 @@ paths:
     post:
       summary: 'Delegates to {@link Moredatamanagement#findMoreDataEtos}.'
       description: Return SampleData that fits the filter.
-      operationId: findSampleEtos
+      operationId: findSampleDataEtos
       responses:
         '200':
           description: List of SampleData's.
@@ -80,6 +80,25 @@ paths:
       tags:
         - searchCriteria
         - paginated
+  /sampledatamanagement/v1/sampledata/custom/{id}:
+    get:
+      operationId: customMethod
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+            maximum: 100
+      responses:
+        '200':
+          description: Custom Method
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SampleData'
 components:
   schemas:
     SampleData:
@@ -108,24 +127,11 @@ components:
         mail:
           type: string
           description: Mail string.
-        data:
-          maximum: 100
-          $ref: '#/components/schemas/ModeData'
-        tableList:
-          type: array
-          items:
-            $ref: '#/components/schemas/ModeData'
       required:
         - id
         - name
-    ModeData:
+    MoreData:
       title: moredatamanagement
-      type: object
-      properties:
-        example:
-          type: string
-    Table:
-      title: sampledatamanagement
       type: object
       properties:
         example:
@@ -135,5 +141,5 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SampleData'
+            $ref: '#/components/schemas/Sample'
       required: true

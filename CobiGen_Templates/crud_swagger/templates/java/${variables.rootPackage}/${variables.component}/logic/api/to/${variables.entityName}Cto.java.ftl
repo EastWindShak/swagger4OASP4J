@@ -17,7 +17,7 @@ public class ${variables.entityName}Cto extends AbstractCto {
 
 <#list model.properties as property>
 <#if property.isEntity>
-   	private ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false, false)?replace("Entity", "Eto")} ${property.name};
+   	private ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)?replace("Entity", "Eto")} ${property.name};
 </#if>
 </#list>
 
@@ -31,11 +31,11 @@ public class ${variables.entityName}Cto extends AbstractCto {
 
 <#list model.properties as property>
 	<#if property.isEntity>
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false, false)?replace("Entity", "Eto")} get${property.name?cap_first}() {
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)?replace("Entity", "Eto")} get${property.name?cap_first}() {
 		return this.${property.name};
 	}
 	
-	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property.type, property.format, property.isCollection, property.isEntity, false, false)?replace("Entity", "Eto")} ${property.name}) {
+	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)?replace("Entity", "Eto")} ${property.name}) {
 		this.${property.name} = ${property.name};
 	}
 	</#if>
