@@ -18,31 +18,28 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 @Named
 public class MoreDataDaoImpl extends ApplicationDaoImpl<MoreDataEntity> implements MoreDataDao {
 
-  /**
-   * The constructor.
-   */
-  public MoreDataDaoImpl() {
+	/**
+	 * The constructor.
+	 */
+	public MoreDataDaoImpl() {
 
-    super();
-  }
+		super();
+	}
 
-  @Override
-  public Class<MoreDataEntity> getEntityClass() {
+	@Override
+	public Class<MoreDataEntity> getEntityClass() {
+		return MoreDataEntity.class;
+	}
 
-    return MoreDataEntity.class;
-  }
+	@Override
+	public PaginatedListTo<MoreDataEntity> findMoreDatas(MoreDataSearchCriteriaTo criteria) {
 
-  @Override
-  public PaginatedListTo<MoreDataEntity> findMoreDatas(MoreDataSearchCriteriaTo criteria) {
+		MoreDataEntity moredata = Alias.alias(MoreDataEntity.class);
+		EntityPathBase<MoreDataEntity> alias = Alias.$(moredata);
+		JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
 
-    MoreDataEntity moredata = Alias.alias(MoreDataEntity.class);
-    EntityPathBase<MoreDataEntity> alias = Alias.$(moredata);
-    JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
-
-    if (criteria.getExample() != null) {
-      query.where(Alias.$(moredata.getExample()).eq(criteria.getExample()));
-    }
-    return findPaginated(criteria, query, alias);
-  }
+		query.where(Alias.$(moredata.getExample()).eq(criteria.getExample()));
+		return findPaginated(criteria, query, alias);
+	}
 
 }

@@ -430,13 +430,13 @@ public class OaspUtil {
     	}
     	if((boolean)response.get("isArray")){
     		if((boolean)response.get("isEntity")) {
-    			return "List<" + returnType + "Eto>";    			
+    			return "List<" + returnType + ">";    			
     		}else {
     			return "List<" + returnType + ">";
     		}
     	} else if ((boolean)response.get("isPaginated")) {
     		if ((boolean)response.get("isEntity")) {
-    			return "PaginatedListTo<" + returnType + "Eto>";
+    			return "PaginatedListTo<" + returnType + ">";
     		} else {
     			return "PaginatedListTo<" + returnType + ">";
     		}

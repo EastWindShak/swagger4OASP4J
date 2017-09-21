@@ -18,39 +18,31 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 @Named
 public class SampleDataDaoImpl extends ApplicationDaoImpl<SampleDataEntity> implements SampleDataDao {
 
-  /**
-   * The constructor.
-   */
-  public SampleDataDaoImpl() {
+	/**
+	 * The constructor.
+	 */
+	public SampleDataDaoImpl() {
 
-    super();
-  }
+		super();
+	}
 
-  @Override
-  public Class<SampleDataEntity> getEntityClass() {
+	@Override
+	public Class<SampleDataEntity> getEntityClass() {
+		return SampleDataEntity.class;
+	}
 
-    return SampleDataEntity.class;
-  }
+	@Override
+	public PaginatedListTo<SampleDataEntity> findSampleDatas(SampleDataSearchCriteriaTo criteria) {
 
-  @Override
-  public PaginatedListTo<SampleDataEntity> findSampleDatas(SampleDataSearchCriteriaTo criteria) {
+		SampleDataEntity sampledata = Alias.alias(SampleDataEntity.class);
+		EntityPathBase<SampleDataEntity> alias = Alias.$(sampledata);
+		JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
 
-    SampleDataEntity sampledata = Alias.alias(SampleDataEntity.class);
-    EntityPathBase<SampleDataEntity> alias = Alias.$(sampledata);
-    JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
-    if (criteria.getName() != null) {
-      query.where(Alias.$(sampledata.getName()).eq(criteria.getName()));
-    }
-    if (criteria.getSurname() != null) {
-      query.where(Alias.$(sampledata.getSurname()).eq(criteria.getSurname()));
-    }
-    if (criteria.getAge() != 0) {
-      query.where(Alias.$(sampledata.getAge()).eq(criteria.getAge()));
-    }
-    if (criteria.getMail() != null) {
-      query.where(Alias.$(sampledata.getMail()).eq(criteria.getMail()));
-    }
-    return findPaginated(criteria, query, alias);
-  }
+		query.where(Alias.$(sampledata.getName()).eq(criteria.getName()));
+		query.where(Alias.$(sampledata.getSurname()).eq(criteria.getSurname()));
+		query.where(Alias.$(sampledata.getAge()).eq(criteria.getAge()));
+		query.where(Alias.$(sampledata.getMail()).eq(criteria.getMail()));
+		return findPaginated(criteria, query, alias);
+	}
 
 }

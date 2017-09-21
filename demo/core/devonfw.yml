@@ -6,48 +6,31 @@ info:
   description: Example of a API definition
   version: 1.0.0
 paths:
-  '/sampledatamanagement/v1/sampledata/{id}/':
+  /sampledatamanagement/v1/sampledata/custom/{id}:
     get:
-      summary: 'Delegates to {@link Sampledatamanagement#findSampleData}.'
-      description: Get a SampleData by his ID.
-      operationId: findSampleData
+      operationId: customMethod
       parameters:
         - name: id
           in: path
           required: true
           schema:
-            type: integer
+            type: string
             format: int64
             minimum: 0
             maximum: 100
       responses:
         '200':
-          description: An SampleDataETO object
+          description: Custom Method
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SampleData'
-    delete:
-      summary: 'Delegates to {@link Sampledatamanagement#deleteSampleData}.'
-      description: Deletes an existent SampleData from his ID.
-      operationId: deleteSampleData
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: number
-            format: int64
-            minimum: 0
-            maximum: 100
-      responses:
-        '200':
-          description: An SampleDataETO object
-  /sampledatamanagement/v1/sampledata/:
+          
+  /sampledatamanagement/v1/sampledata/customSave:
     post:
       summary: 'Delegates to {@link Sampledatamanagement#saveSampleData}.'
       description: Save a SampleData into de DB
-      operationId: saveSampleData
+      operationId: saveCustomSampleData
       responses:
         '200':
           description: An SampleDataETO object.
@@ -61,11 +44,11 @@ paths:
         $ref: '#/components/requestBodies/SampleData'
       tags:
        - paginated
-  /sampledatamanagement/v1/sampledata/search/:
+  /sampledatamanagement/v1/sampledata/customSearch/:
     post:
       summary: 'Delegates to {@link Moredatamanagement#findMoreDataEtos}.'
       description: Return SampleData that fits the filter.
-      operationId: findSampleDataEtos
+      operationId: findCustomSampleDataEtos
       responses:
         '200':
           description: List of SampleData's.
@@ -80,25 +63,6 @@ paths:
       tags:
         - searchCriteria
         - paginated
-  /sampledatamanagement/v1/sampledata/custom/{id}:
-    get:
-      operationId: customMethod
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
-            maximum: 100
-      responses:
-        '200':
-          description: Custom Method
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SampleData'
 components:
   schemas:
     SampleData:
@@ -141,5 +105,5 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Sample'
+            $ref: '#/components/schemas/SampleData'
       required: true

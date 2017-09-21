@@ -3,6 +3,7 @@ package com.capgemini.demo.sampledatamanagement.service.impl.rest;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.capgemini.demo.sampledatamanagement.common.api.SampleData;
 import com.capgemini.demo.sampledatamanagement.logic.api.Sampledatamanagement;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataEto;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataSearchCriteriaTo;
@@ -48,6 +49,18 @@ public class SampledatamanagementRestServiceImpl implements Sampledatamanagement
 	public SampleDataEto customMethod(long id) {
 
 		return this.sampledatamanagement.customMethod(id);
+	}
+
+	@Override
+	public PaginatedListTo<SampleDataEto> saveCustomSampleData(SampleDataEto sampleData) {
+
+		return this.sampledatamanagement.saveCustomSampleData(sampleData);
+	}
+
+	@Override
+	public PaginatedListTo<SampleDataEto> findCustomSampleDataEtos(SampleDataSearchCriteriaTo criteria) {
+
+		return this.sampledatamanagement.findCustomSampleDataEtos(criteria);
 	}
 
 }

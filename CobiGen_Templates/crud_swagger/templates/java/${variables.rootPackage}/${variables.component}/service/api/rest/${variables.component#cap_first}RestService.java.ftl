@@ -10,7 +10,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import ${variables.rootPackage}.${variables.component}.logic.api.${variables.entityName?cap_first};
 import ${variables.rootPackage}.${variables.component}.logic.api.to.${variables.entityName?cap_first}Eto;
 import ${variables.rootPackage}.${variables.component}.logic.api.to.${variables.entityName?cap_first}SearchCriteriaTo;
 
@@ -80,12 +79,7 @@ public interface ${variables.component?cap_first}RestService {
   public ${returnType?replace("Entity", "Eto")} ${operation.operationId}(
     <#list operation.parameters as parameter>
     	<#if parameter.inPath>
-    	@PathParam("${parameter.name}")
-    	</#if>
-    	${OaspUtil.getJAVAConstraint(parameter.constraints)}
-    	${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)} ${parameter.name}<#if parameter?has_next>, </#if>
-    </#list>
-  	);
+    	@PathParam("${parameter.name}")</#if>${OaspUtil.getJAVAConstraint(parameter.constraints)}${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)} <#if parameter.isSearchCriteria>SearchCriteriaTo<#elseif parameter.isEntity>Eto</#if> ${parameter.name}<#if parameter?has_next>, </#if></#list>);
   		</#if>
   	</#list>
  </#list>

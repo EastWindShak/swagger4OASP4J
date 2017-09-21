@@ -1,5 +1,6 @@
 package com.capgemini.demo.sampledatamanagement.logic.api;
 
+import com.capgemini.demo.sampledatamanagement.common.api.SampleData;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataEto;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataSearchCriteriaTo;
 
@@ -48,4 +49,8 @@ public interface Sampledatamanagement {
 	SampleDataEto saveSampleData(SampleDataEto sampleData);
 
 	SampleDataEto customMethod(long id);
+
+	PaginatedListTo<SampleDataEto> saveCustomSampleData(SampleData sampleData);
+
+	PaginatedListTo<SampleDataEto> findCustomSampleDataEtos(SampleDataSearchCriteriaTo criteria);
 }

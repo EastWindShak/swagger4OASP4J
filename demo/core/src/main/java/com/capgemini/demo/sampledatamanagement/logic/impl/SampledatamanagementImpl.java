@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.demo.general.logic.base.AbstractComponentFacade;
+import com.capgemini.demo.sampledatamanagement.common.api.SampleData;
 import com.capgemini.demo.sampledatamanagement.dataaccess.api.SampleDataEntity;
 import com.capgemini.demo.sampledatamanagement.dataaccess.api.dao.SampleDataDao;
 import com.capgemini.demo.sampledatamanagement.logic.api.Sampledatamanagement;
@@ -83,6 +84,18 @@ public class SampledatamanagementImpl extends AbstractComponentFacade implements
 	@Override
 	public SampleDataEto customMethod(long id) {
 		// TODO customMethod
+		return null;
+	}
+
+	@Override
+	public PaginatedListTo<SampleDataEto> saveCustomSampleData(SampleData sampleData) {
+		// TODO saveCustomSampleData
+		return null;
+	}
+
+	@Override
+	public PaginatedListTo<SampleDataEto> findCustomSampleDataEtos(SampleDataSearchCriteriaTo criteria) {
+		// TODO findCustomSampleDataEtos
 		return null;
 	}
 
