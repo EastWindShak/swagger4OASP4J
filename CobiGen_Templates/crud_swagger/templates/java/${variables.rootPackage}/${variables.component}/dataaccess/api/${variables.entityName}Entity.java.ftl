@@ -51,17 +51,17 @@ public class ${variables.entityName?cap_first}Entity extends ApplicationPersiste
 		<#elseif property.constraints.maxLength?? && property.constraints.minLength??>
 	@Size(max = ${property.constraints.maxLength}, min = ${property.constraints.minLength})	
 		</#if>
-	private ${OaspUtil.getOaspTypeFromOpenAPI(property, false, true)} ${property.name};
+	private ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} ${property.name};
 	</#if>
 </#list>
 
 <#list model.properties as property>
 	<#if property.name != "id">
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false, true)} get${property.name?cap_first}() {
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} get${property.name?cap_first}() {
 		return this.${property.name};
 	}
 	
-	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false, true)} ${property.name}) {
+	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} ${property.name}) {
 		this.${property.name} = ${property.name};
 	}
 	</#if>
@@ -71,7 +71,7 @@ public class ${variables.entityName?cap_first}Entity extends ApplicationPersiste
 <#list model.properties as property>
 	<#if !property.isCollection && property.isEntity>
 	@Override
-	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property, true, true)} ${property.name}Id) {
+	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} ${property.name}Id) {
 		if (${property.name}Id == null) {
           this.${property.name} = null;
         } else {

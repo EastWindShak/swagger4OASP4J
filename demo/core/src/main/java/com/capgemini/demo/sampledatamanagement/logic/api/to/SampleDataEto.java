@@ -48,11 +48,11 @@ public class SampleDataEto extends AbstractEto implements SampleData {
 		this.surname = surname;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return this.age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 

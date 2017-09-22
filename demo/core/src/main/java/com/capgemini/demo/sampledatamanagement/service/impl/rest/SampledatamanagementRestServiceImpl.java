@@ -46,9 +46,15 @@ public class SampledatamanagementRestServiceImpl implements Sampledatamanagement
 	}
 
 	@Override
-	public SampleDataEto customMethod(long id) {
+	public SampleData customMethod(long id) {
 
 		return this.sampledatamanagement.customMethod(id);
+	}
+
+	@Override
+	public Boolean deleteCustomSampleData(long id) {
+
+		return this.sampledatamanagement.deleteCustomSampleData(id);
 	}
 
 	@Override

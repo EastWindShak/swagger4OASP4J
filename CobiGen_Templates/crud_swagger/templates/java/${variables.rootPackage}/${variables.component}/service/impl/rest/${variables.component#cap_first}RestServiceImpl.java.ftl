@@ -53,7 +53,7 @@ public class ${variables.component?cap_first}RestServiceImpl implements ${variab
   				<#if parameter.isSearchCriteria>
   			${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}SearchCriteriaTo criteria<#if parameter?has_next>, </#if>
   				<#elseif parameter.isEntity>
-  		  ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}Eto parameter.name?replace("Entity","")<#if parameter?has_next>, </#if>
+  		  ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}Eto ${parameter.name?replace("Entity","")}<#if parameter?has_next>, </#if>
   		    <#else>
   		  ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)} ${parameter.name}<#if parameter?has_next>, </#if>
   		   	</#if>
@@ -65,7 +65,7 @@ public class ${variables.component?cap_first}RestServiceImpl implements ${variab
   				<#if parameter.isSearchCriteria>
   			criteria<#if parameter?has_next>, </#if>
   				<#elseif parameter.isEntity>
-  		  parameter.name?replace("Entity","")<#if parameter?has_next>, </#if>
+  		  ${parameter.name?replace("Entity","")}<#if parameter?has_next>, </#if>
   		   	<#else>
   		  ${parameter.name}<#if parameter?has_next>, </#if>
   		   	</#if>

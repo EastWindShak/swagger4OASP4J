@@ -38,7 +38,10 @@ public class MoreDataDaoImpl extends ApplicationDaoImpl<MoreDataEntity> implemen
 		EntityPathBase<MoreDataEntity> alias = Alias.$(moredata);
 		JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
 
-		query.where(Alias.$(moredata.getExample()).eq(criteria.getExample()));
+		String example = criteria.getExample();
+		if (example != null) {
+			query.where(Alias.$(moredata.getExample()).eq(example));
+		}
 		return findPaginated(criteria, query, alias);
 	}
 

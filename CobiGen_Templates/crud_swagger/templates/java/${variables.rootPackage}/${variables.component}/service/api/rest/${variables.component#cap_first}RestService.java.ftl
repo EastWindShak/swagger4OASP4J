@@ -79,7 +79,7 @@ public interface ${variables.component?cap_first}RestService {
   public ${returnType?replace("Entity", "Eto")} ${operation.operationId}(
     <#list operation.parameters as parameter>
     	<#if parameter.inPath>
-    	@PathParam("${parameter.name}")</#if>${OaspUtil.getJAVAConstraint(parameter.constraints)}${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)} <#if parameter.isSearchCriteria>SearchCriteriaTo<#elseif parameter.isEntity>Eto</#if> ${parameter.name}<#if parameter?has_next>, </#if></#list>);
+    	@PathParam("${parameter.name}")</#if>${OaspUtil.getJAVAConstraint(parameter.constraints)}${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)}<#if parameter.isSearchCriteria>SearchCriteriaTo<#elseif parameter.isEntity>Eto</#if> ${parameter.name}<#if parameter?has_next>, </#if></#list>);
   		</#if>
   	</#list>
  </#list>

@@ -12,6 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.capgemini.demo.sampledatamanagement.common.api.SampleData;
+import com.capgemini.demo.sampledatamanagement.logic.api.Sampledatamanagement;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataEto;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataSearchCriteriaTo;
 
@@ -73,7 +75,11 @@ public interface SampledatamanagementRestService {
 
 	@GET
 	@Path("/sampledata/custom/{id}/")
-	public SampleDataEto customMethod(@PathParam("id") @Max(100) @Min(0) long id);
+	public SampleData customMethod(@PathParam("id") @Max(100) @Min(0) long id);
+
+	@DELETE
+	@Path("/sampledata/custom/{id}/")
+	public Boolean deleteCustomSampleData(@PathParam("id") @Max(100) @Min(0) long id);
 
 	@POST
 	@Path("/sampledata/customSave/")

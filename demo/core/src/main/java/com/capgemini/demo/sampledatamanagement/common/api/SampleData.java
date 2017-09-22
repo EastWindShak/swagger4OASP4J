@@ -12,9 +12,9 @@ public interface SampleData extends ApplicationEntity {
 
 	public String getSurname();
 
-	public void setAge(int age);
+	public void setAge(Integer age);
 
-	public int getAge();
+	public Integer getAge();
 
 	public void setMail(String mail);
 

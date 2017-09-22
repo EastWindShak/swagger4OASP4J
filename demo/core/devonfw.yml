@@ -14,7 +14,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            type: integer
             format: int64
             minimum: 0
             maximum: 100
@@ -25,7 +25,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SampleData'
-          
+    delete:
+      summary: 'Delegates to {@link Sampledatamanagement#deleteSampleData}.'
+      description: Deletes an existent SampleData from his ID.
+      operationId: deleteCustomSampleData
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+            maximum: 100
+      responses:
+        '200':
+          description: An SampleDataETO object
+          content:
+             '*/*':
+               schema:
+                 type: boolean
   /sampledatamanagement/v1/sampledata/customSave:
     post:
       summary: 'Delegates to {@link Sampledatamanagement#saveSampleData}.'
@@ -66,16 +85,10 @@ paths:
 components:
   schemas:
     SampleData:
-      title: sampledatamanagement
+      title: SampleData
+      description: sampledatamanagement
       type: object
-      description: Description of the object
       properties:
-        id:
-          type: integer
-          format: int64
-          minimum: 4
-          maximum: 100
-          description: Unique identifier representing a specific SampleData
         name:
           type: string
           maxLength: 100
@@ -92,10 +105,10 @@ components:
           type: string
           description: Mail string.
       required:
-        - id
         - name
     MoreData:
-      title: moredatamanagement
+      title: MoreData
+      description: moredatamanagement
       type: object
       properties:
         example:

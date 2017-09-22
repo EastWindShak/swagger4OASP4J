@@ -50,11 +50,11 @@ public class ${variables.entityName}Eto extends AbstractEto implements ${variabl
 <#list model.properties as property>
 	<#if property.name != "id">
 		<#if !property.isCollection && !property.isEntity>
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false, true)} get${property.name?cap_first}() {
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} get${property.name?cap_first}() {
 		return this.${property.name};
 	}
 	
-	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false, true)} ${property.name}) {
+	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} ${property.name}) {
 		this.${property.name} = ${property.name};
 	}
 		</#if>

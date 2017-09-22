@@ -44,19 +44,22 @@ public class ${variables.entityName}DaoImpl extends ApplicationDaoImpl<${variabl
 
     <#list model.properties as property>
     <#compress>
-    <#assign newFieldType=OaspUtil.getOaspTypeFromOpenAPI(property, true, true)>
+    <#assign newFieldType=OaspUtil.getOaspTypeFromOpenAPI(property, true, false)>
     <#assign fieldCapName=property.name?cap_first>
     </#compress>
     	<#if property.name != "id">
     		<#if !property.isCollection>
+    ${newFieldType} ${property.name} = criteria.<#if property.type=='boolean'>is${fieldCapName}()<#else>get${fieldCapName}()</#if>;
         	<#compress>
+    if (${property.name} != null) {
           	<#if property.isEntity && newFieldType=='Long'>
               if(${variables.entityName?lower_case}.get${fieldCapName}() != null) {
     query.where(Alias.$(${variables.entityName?lower_case}.get${fieldCapName}Id()).eq(criteria.get${fieldCapName}Id()));
               }
           	<#else>
-    query.where(Alias.$(${variables.entityName?lower_case}.<#if property.type=='boolean'>is${fieldCapName}()<#else>get${fieldCapName}()</#if>).eq(criteria.get${fieldCapName}()));
-          	</#if>   
+    query.where(Alias.$(${variables.entityName?lower_case}.<#if property.type=='boolean'>is${fieldCapName}()<#else>get${fieldCapName}()</#if>).eq(${property.name}));
+          	</#if>
+    } 
     			</#compress>
     		</#if>
     	</#if>

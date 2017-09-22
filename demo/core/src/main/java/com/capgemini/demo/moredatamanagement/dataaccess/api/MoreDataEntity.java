@@ -6,7 +6,7 @@ import com.capgemini.demo.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.capgemini.demo.moredatamanagement.common.api.MoreData;
 
 /**
- * Data access object for MoreData entities
+ * moredatamanagement
  */
 @Entity
 @javax.persistence.Table(name = "MoreData")

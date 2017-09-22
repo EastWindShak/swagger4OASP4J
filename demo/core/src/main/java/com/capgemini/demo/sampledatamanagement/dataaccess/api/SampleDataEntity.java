@@ -7,7 +7,7 @@ import com.capgemini.demo.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.capgemini.demo.sampledatamanagement.common.api.SampleData;
 
 /**
- * Description of the object
+ * sampledatamanagement
  */
 @Entity
 @javax.persistence.Table(name = "SampleData")
@@ -27,7 +27,7 @@ public class SampleDataEntity extends ApplicationPersistenceEntity implements Sa
 	/**
 	 * Age integer.
 	 */
-	private int age;
+	private Integer age;
 	/**
 	 * Mail string.
 	 */
@@ -49,11 +49,11 @@ public class SampleDataEntity extends ApplicationPersistenceEntity implements Sa
 		this.surname = surname;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return this.age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 

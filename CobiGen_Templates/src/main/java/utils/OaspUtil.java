@@ -394,7 +394,7 @@ public class OaspUtil {
     					if (withIdRef) {
     						typeConverted = "Long";
     					} else {
-    						typeConverted = type + "Entity";    				    				
+    						typeConverted = type;    				    				
     					}
     				} else {
     					typeConverted = type;
@@ -436,7 +436,7 @@ public class OaspUtil {
     		}
     	} else if ((boolean)response.get("isPaginated")) {
     		if ((boolean)response.get("isEntity")) {
-    			return "PaginatedListTo<" + returnType + ">";
+    			return "PaginatedListTo<" + returnType + "Eto>";
     		} else {
     			return "PaginatedListTo<" + returnType + ">";
     		}

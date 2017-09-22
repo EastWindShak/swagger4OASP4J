@@ -38,10 +38,22 @@ public class SampleDataDaoImpl extends ApplicationDaoImpl<SampleDataEntity> impl
 		EntityPathBase<SampleDataEntity> alias = Alias.$(sampledata);
 		JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
 
-		query.where(Alias.$(sampledata.getName()).eq(criteria.getName()));
-		query.where(Alias.$(sampledata.getSurname()).eq(criteria.getSurname()));
-		query.where(Alias.$(sampledata.getAge()).eq(criteria.getAge()));
-		query.where(Alias.$(sampledata.getMail()).eq(criteria.getMail()));
+		String name = criteria.getName();
+		if (name != null) {
+			query.where(Alias.$(sampledata.getName()).eq(name));
+		}
+		String surname = criteria.getSurname();
+		if (surname != null) {
+			query.where(Alias.$(sampledata.getSurname()).eq(surname));
+		}
+		Integer age = criteria.getAge();
+		if (age != null) {
+			query.where(Alias.$(sampledata.getAge()).eq(age));
+		}
+		String mail = criteria.getMail();
+		if (mail != null) {
+			query.where(Alias.$(sampledata.getMail()).eq(mail));
+		}
 		return findPaginated(criteria, query, alias);
 	}
 

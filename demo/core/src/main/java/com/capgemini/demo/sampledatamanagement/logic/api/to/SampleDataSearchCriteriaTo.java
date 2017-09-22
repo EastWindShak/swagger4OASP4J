@@ -14,7 +14,7 @@ public class SampleDataSearchCriteriaTo extends SearchCriteriaTo {
 
 	private String name;
 	private String surname;
-	private int age;
+	private Integer age;
 	private String mail;
 
 	/**
@@ -41,11 +41,11 @@ public class SampleDataSearchCriteriaTo extends SearchCriteriaTo {
 		this.surname = surname;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return this.age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
