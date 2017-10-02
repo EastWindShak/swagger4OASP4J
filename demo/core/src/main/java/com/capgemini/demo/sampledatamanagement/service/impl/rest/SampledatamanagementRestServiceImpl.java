@@ -7,6 +7,8 @@ import com.capgemini.demo.sampledatamanagement.common.api.SampleData;
 import com.capgemini.demo.sampledatamanagement.logic.api.Sampledatamanagement;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataEto;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataSearchCriteriaTo;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.TableEto;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.TableSearchCriteriaTo;
 import com.capgemini.demo.sampledatamanagement.service.api.rest.SampledatamanagementRestService;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
@@ -20,6 +22,30 @@ public class SampledatamanagementRestServiceImpl implements Sampledatamanagement
 
 	@Inject
 	private Sampledatamanagement sampledatamanagement;
+
+	@Override
+	public TableEto getTable(long id) {
+
+		return this.sampledatamanagement.findTable(id);
+	}
+
+	@Override
+	public TableEto saveTable(TableEto table) {
+
+		return this.sampledatamanagement.saveTable(table);
+	}
+
+	@Override
+	public void deleteTable(long id) {
+
+		this.sampledatamanagement.deleteTable(id);
+	}
+
+	@Override
+	public PaginatedListTo<TableEto> findTablesByPost(TableSearchCriteriaTo searchCriteriaTo) {
+
+		return this.sampledatamanagement.findTableEtos(searchCriteriaTo);
+	}
 
 	@Override
 	public SampleDataEto getSampleData(long id) {

@@ -1,0 +1,45 @@
+{
+"buttons": {
+    "submit": "Send",
+    "search": "SEARCH",
+    "cancel": "CANCEL",
+    "save": "SAVE",
+    "clean": "CLEAR",
+    "close": "Close",
+    "addItem": "Add item",
+    "editItem": "Edit item",
+    "deleteItem": "Delete item"
+  },
+  "header": {
+    "title": "demo Angular application",
+    "error": "LOGIN ERROR"
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "errorMsg": "Wrong username or password"
+  },
+  "home": "Home",
+  "sampledatamanagementdatagrid": {
+    "navData": "SampleData_EN",
+    "navDataSub": "Grid of SampleData_EN",
+    "title": "SampleData_EN grid",
+    "addTitle": "Add new item",
+    "editTitle": "Edit item",
+    "searchTip": "Search Panel",
+    "sortTip": "Clear Sorting",
+    "columns": {
+      "name": "Name_EN",
+      "surname": "Surname_EN",
+      "age": "Age_EN",
+      "mail": "Mail_EN"
+    },
+    "alert": {
+      "title": "Confirm",
+      "message": "Are you sure you want to delete this item?",
+      "cancelBtn": "No, Cancel",
+      "acceptBtn": "Yes, Delete"
+    }
+  }
+}

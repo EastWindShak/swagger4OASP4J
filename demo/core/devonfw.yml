@@ -84,6 +84,14 @@ paths:
         - paginated
 components:
   schemas:
+    Table:
+      title: Table
+      description: sampledatamanagement
+      type: object
+      properties:
+        seats:
+          type: integer
+          format: int32
     SampleData:
       title: SampleData
       description: sampledatamanagement

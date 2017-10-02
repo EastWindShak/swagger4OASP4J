@@ -1,0 +1,45 @@
+{
+"buttons": {
+  "submit": "Enviar",
+  "close": "Cerrar",
+  "cancel": "CANCELAR",
+  "save": "GUARDAR",
+  "search": "BUSCAR",
+  "clean": "LIMPIAR",
+  "addItem": "Añadir fila",
+  "editItem": "Editar fila",
+  "deleteItem": "Eliminar fila"
+},
+  "header": {
+    "title": "Aplicacion Angular de demo",
+    "error": "Error de acceso"
+  },
+  "login": {
+    "title": "Acceso",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "errorMsg": "Nombre de usuario o contraseña incorrectos"
+  },
+  "home": "Inicio",
+  "sampledatamanagementdatagrid": {
+    "navData": "SampleData_ES",
+    "navDataSub": "Tabla de SampleData_ES",
+    "title": "Tabla de SampleData_ES",
+    "addtitle": "Añadir nueva fila",
+    "editTitle": "Editar fila existente",
+    "searchTip": "Panel de búsqueda",
+    "sortTip": "Limpiar Ordenación",
+    "columns": {
+      "name": "Name_ES",
+      "surname": "Surname_ES",
+      "age": "Age_ES",
+      "mail": "Mail_ES"
+    },
+    "alert": {
+      "title": "Confirmación",
+      "message": "¿Seguro que deseas eliminar esta fila?",
+      "cancelBtn": "No, Cancelar",
+      "acceptBtn": "Sí, Eliminar"
+    }
+  }
+}

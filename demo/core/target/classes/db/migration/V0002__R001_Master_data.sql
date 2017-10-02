@@ -17,3 +17,11 @@ INSERT INTO MoreData (id, modificationCounter, example) VALUES (2, 0, 'example s
 INSERT INTO MoreData (id, modificationCounter, example) VALUES (3, 0, 'example string 4');
 INSERT INTO MoreData (id, modificationCounter, example) VALUES (4, 0, 'example string 5');
 INSERT INTO MoreData (id, modificationCounter, example) VALUES (5, 0, 'example string 6');
+
+
+INSERT INTO RestaurantTable (id, modificationCounter, seats) VALUES (0, 0, 4);
+INSERT INTO RestaurantTable (id, modificationCounter, seats) VALUES (1, 0, 2);
+INSERT INTO RestaurantTable (id, modificationCounter, seats) VALUES (2, 0, 3);
+INSERT INTO RestaurantTable (id, modificationCounter, seats) VALUES (3, 0, 6);
+INSERT INTO RestaurantTable (id, modificationCounter, seats) VALUES (4, 0, 8);
+INSERT INTO RestaurantTable (id, modificationCounter, seats) VALUES (5, 0, 10);

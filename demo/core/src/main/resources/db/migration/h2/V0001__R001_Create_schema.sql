@@ -23,6 +23,13 @@ CREATE TABLE MOREDATA(
   CONSTRAINT PK_MoreData PRIMARY KEY(id)
 );
 
+CREATE TABLE RestaurantTable(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  seats INTEGER,
+  CONSTRAINT PK_RestaurantTable PRIMARY KEY(id)
+);
+
 -- *** BinaryObject (BLOBs) ***
 CREATE TABLE BinaryObject (
   id BIGINT NOT NULL AUTO_INCREMENT,

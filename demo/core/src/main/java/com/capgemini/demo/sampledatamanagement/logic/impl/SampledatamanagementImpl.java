@@ -11,10 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.demo.general.logic.base.AbstractComponentFacade;
 import com.capgemini.demo.sampledatamanagement.dataaccess.api.SampleDataEntity;
+import com.capgemini.demo.sampledatamanagement.dataaccess.api.TableEntity;
 import com.capgemini.demo.sampledatamanagement.dataaccess.api.dao.SampleDataDao;
+import com.capgemini.demo.sampledatamanagement.dataaccess.api.dao.TableDao;
 import com.capgemini.demo.sampledatamanagement.logic.api.Sampledatamanagement;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataEto;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataSearchCriteriaTo;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.TableEto;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.TableSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -31,6 +35,12 @@ public class SampledatamanagementImpl extends AbstractComponentFacade implements
 	private static final Logger LOG = LoggerFactory.getLogger(SampledatamanagementImpl.class);
 
 	/**
+	 * @see #getTableDao()
+	 */
+	@Inject
+	private TableDao tableDao;
+
+	/**
 	 * @see #getSampleDataDao()
 	 */
 	@Inject
@@ -40,7 +50,54 @@ public class SampledatamanagementImpl extends AbstractComponentFacade implements
 	 * The constructor.
 	 */
 	public SampledatamanagementImpl() {
+
 		super();
+	}
+
+	@Override
+	public TableEto findTable(Long id) {
+
+		LOG.debug("Get Table with id {} from database.", id);
+		return getBeanMapper().map(getTableDao().findOne(id), TableEto.class);
+	}
+
+	@Override
+	public PaginatedListTo<TableEto> findTableEtos(TableSearchCriteriaTo criteria) {
+
+		criteria.limitMaximumPageSize(MAXIMUM_HIT_LIMIT);
+		PaginatedListTo<TableEntity> tables = getTableDao().findTables(criteria);
+		return mapPaginatedEntityList(tables, TableEto.class);
+	}
+
+	@Override
+	public boolean deleteTable(Long tableId) {
+
+		TableEntity table = getTableDao().find(tableId);
+		getTableDao().delete(table);
+		LOG.debug("The table with id '{}' has been deleted.", tableId);
+		return true;
+	}
+
+	@Override
+	public TableEto saveTable(TableEto table) {
+
+		Objects.requireNonNull(table, "table");
+		TableEntity tableEntity = getBeanMapper().map(table, TableEntity.class);
+
+		// initialize, validate tableEntity here if necessary
+		TableEntity resultEntity = getTableDao().save(tableEntity);
+		LOG.debug("Table with id '{}' has been created.", resultEntity.getId());
+
+		return getBeanMapper().map(resultEntity, TableEto.class);
+	}
+
+	/**
+	 * Returns the field 'tableDao'.
+	 *
+	 * @return the {@link TableDao} instance.
+	 */
+	public TableDao getTableDao() {
+		return this.tableDao;
 	}
 
 	@Override
@@ -112,4 +169,5 @@ public class SampledatamanagementImpl extends AbstractComponentFacade implements
 	public SampleDataDao getSampleDataDao() {
 		return this.sampledataDao;
 	}
+
 }
