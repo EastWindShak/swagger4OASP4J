@@ -3,11 +3,11 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1">
 
   <templates>
-    <templateExtension ref="${variables.component}addDialog.component.html" mergeStrategy="html-ng*"/>
-    <templateExtension ref="${variables.component}addDialog.component.ts" mergeStrategy="tsmerge"/>
-    <templateExtension ref="${variables.component}dataGrid.component.html" mergeStrategy="html-ng*"/>
-    <templateExtension ref="${variables.component}dataGrid.component.ts" mergeStrategy="tsmerge"/>
-    <templateExtension ref="${variables.component}dataGrid.service.ts" mergeStrategy="tsmerge"/>
+    <templateExtension ref="${variables.entityName}addDialog.component.html" mergeStrategy="html-ng*"/>
+    <templateExtension ref="${variables.entityName}addDialog.component.ts" mergeStrategy="tsmerge"/>
+    <templateExtension ref="${variables.entityName}dataGrid.component.html" mergeStrategy="html-ng*"/>
+    <templateExtension ref="${variables.entityName}dataGrid.component.ts" mergeStrategy="tsmerge"/>
+    <templateExtension ref="${variables.entityName}dataGrid.service.ts" mergeStrategy="tsmerge"/>
     <templateExtension ref="home.component.html" mergeStrategy="html-ng*"/>
     <templateExtension ref="app.module.ts" mergeStrategy="tsmerge"/>
     <templateExtension ref="BusinessOperations.ts" mergeStrategy="tsmerge"/>
@@ -30,11 +30,11 @@
       <templateRef ref="en.json"/>
     </increment>
     <increment name="app_angular_oasp4j_component" description="Angular OASP4J Component">
-      <templateRef ref="${variables.component}addDialog.component.html"/>
-      <templateRef ref="${variables.component}addDialog.component.ts"/>
-      <templateRef ref="${variables.component}dataGrid.component.html"/>
-      <templateRef ref="${variables.component}dataGrid.component.ts"/>
-      <templateRef ref="${variables.component}dataGrid.service.ts"/>
+      <templateRef ref="${variables.entityName}addDialog.component.html"/>
+      <templateRef ref="${variables.entityName}addDialog.component.ts"/>
+      <templateRef ref="${variables.entityName}dataGrid.component.html"/>
+      <templateRef ref="${variables.entityName}dataGrid.component.ts"/>
+      <templateRef ref="${variables.entityName}dataGrid.service.ts"/>
       <templateRef ref="home.component.html"/>
       <templateRef ref="BusinessOperations.ts"/>
       <templateRef ref="app.module.ts"/>

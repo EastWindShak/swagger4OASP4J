@@ -7,14 +7,14 @@
     <md-nav-list td-sidenav-content>
       <a id="home" md-list-item [routerLink]="['./initialPage']">
         <md-icon md-list-avatar>home</md-icon>
-        <h3 md-line> {{'${variables.component}datagrid.navHome' | translate}} </h3>
-        <p md-line> {{'${variables.component}datagrid.navHomeSub' | translate}} </p>
+        <h3 md-line> {{'${variables.component}datagrid.${variables.entityName}.navHome' | translate}} </h3>
+        <p md-line> {{'${variables.component}datagrid.${variables.entityName}.navHomeSub' | translate}} </p>
       </a>
 
-      <a id="${variables.entityName}" md-list-item [routerLink]="['./${variables.component}dataGrid']">
+      <a id="${variables.entityName}" md-list-item [routerLink]="['./${variables.entityName}']">
         <md-icon md-list-avatar>grid_on</md-icon>
-        <h3 md-line> {{'${variables.component}datagrid.navData' | translate}} </h3>
-        <p md-line> {{'${variables.component}datagrid.navDataSub' | translate}} </p>
+        <h3 md-line> {{'${variables.component}datagrid.${variables.entityName}.navData' | translate}} </h3>
+        <p md-line> {{'${variables.component}datagrid.${variables.entityName}.navDataSub' | translate}} </p>
       </a>
     </md-nav-list>
 

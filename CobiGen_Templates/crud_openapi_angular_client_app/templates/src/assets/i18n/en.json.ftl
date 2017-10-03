@@ -22,22 +22,24 @@
   },
   "home": "Home",
   "${variables.component}datagrid": {
-    "navData": "${variables.entityName}_EN",
-    "navDataSub": "Grid of ${variables.entityName}_EN",
-    "title": "${variables.entityName?cap_first}_EN grid",
+    "${variables.entityName}": {
+    	"title": "${variables.entityName?cap_first}_EN grid",
+    	"navData": "${variables.entityName}_EN",
+        "navDataSub": "Grid of ${variables.entityName}_EN",
+    	"columns": {
+        <#list model.properties as property>
+          <#if property?has_next>
+           "${property.name}": "${property.name?cap_first}_EN",
+          <#else>
+           "${property.name}": "${property.name?cap_first}_EN"
+          </#if>
+        </#list>
+        }
+    },
     "addTitle": "Add new item",
     "editTitle": "Edit item",
     "searchTip": "Search Panel",
     "sortTip": "Clear Sorting",
-    "columns": {
-      <#list model.properties as property>
-        <#if property?has_next>
-      "${property.name}": "${property.name?cap_first}_EN",
-        <#else>
-      "${property.name}": "${property.name?cap_first}_EN"
-        </#if>
-      </#list>
-    },
     "alert": {
       "title": "Confirm",
       "message": "Are you sure you want to delete this item?",

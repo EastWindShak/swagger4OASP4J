@@ -2,11 +2,9 @@
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { ${variables.component?cap_first}DataGridComponent } from './${variables.component}dataGrid/${variables.component}dataGrid.component';
+import { ${variables.entityName?cap_first}DataGridComponent } from './${variables.component}dataGrid/${variables.entityName}dataGrid.component';
 
-import {
-    ${variables.component?cap_first}AddDialogComponent
-} from './${variables.component}dataGrid/${variables.component}addDialog/${variables.component}addDialog.component';
+import { ${variables.entityName?cap_first}AddDialogComponent } from './${variables.component}dataGrid/${variables.entityName}addDialog/${variables.entityName}addDialog.component';
 import { HeaderComponent } from './header/header.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 
@@ -25,7 +23,7 @@ import 'hammerjs';
 
 // services
 import { BusinessOperations } from './BusinessOperations';
-import { ${variables.component?cap_first}DataGridService } from './${variables.component}dataGrid/shared/${variables.component}dataGrid.service';
+import { ${variables.entityName?cap_first}DataGridService } from './${variables.component}dataGrid/shared/${variables.entityName}dataGrid.service';
 import { HttpClient } from './shared/security/httpClient.service';
 import { LoginService } from './login/shared/login.service';
 import { AuthService } from './shared/security/auth.service';
@@ -56,19 +54,19 @@ export function translateFactory(http: Http) {
         AppComponent,
         LoginComponent,
         HomeComponent,
-        ${variables.component?cap_first}DataGridComponent,
-        ${variables.component?cap_first}AddDialogComponent,
+        ${variables.entityName?cap_first}DataGridComponent,
+        ${variables.entityName?cap_first}AddDialogComponent,
         HeaderComponent,
         InitialPageComponent
     ],
     entryComponents: [
-        ${variables.component?cap_first}AddDialogComponent
+        ${variables.entityName?cap_first}AddDialogComponent
     ],
     bootstrap: [
         AppComponent
     ],
     providers: [
-        ${variables.component?cap_first}DataGridService,
+        ${variables.entityName?cap_first}DataGridService,
         HttpClient,
         AuthGuard,
         LoginService,

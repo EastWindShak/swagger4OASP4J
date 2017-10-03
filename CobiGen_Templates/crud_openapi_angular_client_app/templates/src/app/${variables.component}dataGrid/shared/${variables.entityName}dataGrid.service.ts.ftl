@@ -5,7 +5,7 @@ import { HttpClient } from '../../shared/security/httpClient.service';
 import { BusinessOperations } from '../../BusinessOperations';
 
 @Injectable()
-export class ${variables.component?cap_first}DataGridService {
+export class ${variables.entityName?cap_first}DataGridService {
 
     constructor(private BO: BusinessOperations,
                 private http: HttpClient) {

@@ -22,22 +22,24 @@
   },
   "home": "Inicio",
   "${variables.component}datagrid": {
-    "navData": "${variables.entityName}_ES",
-    "navDataSub": "Tabla de ${variables.entityName}_ES",
-    "title": "Tabla de ${variables.entityName?cap_first}_ES",
+    "${variables.entityName}": {
+    	"title": "${variables.entityName?cap_first}_ES grid",
+    	"navData": "${variables.entityName}_ES",
+        "navDataSub": "Tabla de ${variables.entityName}_ES",
+    	"columns": {
+        <#list model.properties as property>
+          <#if property?has_next>
+           "${property.name}": "${property.name?cap_first}_ES",
+          <#else>
+           "${property.name}": "${property.name?cap_first}_ES"
+          </#if>
+        </#list>
+        }
+    },
     "addtitle": "Añadir nueva fila",
     "editTitle": "Editar fila existente",
     "searchTip": "Panel de búsqueda",
     "sortTip": "Limpiar Ordenación",
-    "columns": {
-      <#list model.properties as property>
-        <#if property?has_next>
-      "${property.name}": "${property.name?cap_first}_ES",
-        <#else>
-      "${property.name}": "${property.name?cap_first}_ES"
-        </#if>
-      </#list>
-    },
     "alert": {
       "title": "Confirmación",
       "message": "¿Seguro que deseas eliminar esta fila?",

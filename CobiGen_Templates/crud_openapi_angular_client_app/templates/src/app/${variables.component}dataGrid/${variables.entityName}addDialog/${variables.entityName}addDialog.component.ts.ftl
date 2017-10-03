@@ -3,15 +3,15 @@ import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-${variables.component}-add-dialog',
-  templateUrl: './${variables.component}addDialog.component.html'
+  selector: 'app-${variables.entityName}-add-dialog',
+  templateUrl: './${variables.entityName}addDialog.component.html'
 })
 
-export class ${variables.component?cap_first}AddDialogComponent {
+export class ${variables.entityName?cap_first}AddDialogComponent {
   items: any;
   title: string;
 
-  constructor(public dialogRef: MdDialogRef<${variables.component?cap_first}AddDialogComponent>,
+  constructor(public dialogRef: MdDialogRef<${variables.entityName?cap_first}AddDialogComponent>,
               private translate: TranslateService,
               @Inject(MD_DIALOG_DATA) dialogData: any) {
                 if (!dialogData) {

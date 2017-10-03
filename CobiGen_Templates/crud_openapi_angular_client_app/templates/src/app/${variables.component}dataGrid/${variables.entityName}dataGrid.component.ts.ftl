@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/security/auth.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ${variables.component?cap_first}AddDialogComponent } from './${variables.component}addDialog/${variables.component}addDialog.component';
+import { ${variables.entityName?cap_first}AddDialogComponent } from './${variables.entityName}addDialog/${variables.entityName}addDialog.component';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
@@ -12,30 +12,30 @@ import {
     TdDataTableComponent,
     TdDialogService
 } from '@covalent/core';
-import { ${variables.component?cap_first}DataGridService } from './shared/${variables.component}dataGrid.service';
+import { ${variables.entityName?cap_first}DataGridService } from './shared/${variables.entityName}dataGrid.service';
 import * as _ from 'lodash';
 
 @Component({
     selector: 'app-${variables.entityName?lower_case}data-grid',
-    templateUrl: './${variables.component}dataGrid.component.html',
+    templateUrl: './${variables.entityName}dataGrid.component.html',
 })
 
-export class ${variables.component?cap_first}DataGridComponent implements OnInit {
+export class ${variables.entityName?cap_first}DataGridComponent implements OnInit {
 
     @ViewChild('dataTable') dataTable: TdDataTableComponent
 
     data: any = [];
     columns: ITdDataTableColumn[] = [<#list model.properties as property>
       <#if property?has_next>
-      {name: '${property.name}', label: this.getTranslation('${variables.component}datagrid.columns.${property.name}')},
+      {name: '${property.name}', label: this.getTranslation('${variables.component}datagrid.${variables.entityName}.columns.${property.name}')},
       <#else>
-      {name: '${property.name}', label: this.getTranslation('${variables.component}datagrid.columns.${property.name}')}
+      {name: '${property.name}', label: this.getTranslation('${variables.component}datagrid.${variables.entityName}.columns.${property.name}')}
       </#if>
     </#list>];
 
     selectedRow: any;
 
-    dialogRef: MdDialogRef<${variables.component?cap_first}AddDialogComponent>;
+    dialogRef: MdDialogRef<${variables.entityName?cap_first}AddDialogComponent>;
 
     dataTotal: number;
     searchBox = false;
@@ -55,7 +55,7 @@ export class ${variables.component?cap_first}DataGridComponent implements OnInit
     constructor(public dialog: MdDialog,
                 public authService: AuthService,
                 public router: Router,
-                private dataGridService: ${variables.component?cap_first}DataGridService,
+                private dataGridService: ${variables.entityName?cap_first}DataGridService,
                 private _dialogService: TdDialogService,
                 private translate: TranslateService) {
     }
@@ -74,7 +74,7 @@ export class ${variables.component?cap_first}DataGridComponent implements OnInit
 
         this.translate.onLangChange.subscribe(() => {
                 me.columns.forEach( column => {
-                    this.translate.get('${variables.component}datagrid.columns.' + column.name).subscribe( (res) => {
+                    this.translate.get('${variables.component}datagrid.${variables.entityName}.columns.' + column.name).subscribe( (res) => {
                         column.label = res;
                     });
                 });
@@ -138,7 +138,7 @@ export class ${variables.component?cap_first}DataGridComponent implements OnInit
     }
 
     openDialog(): void {
-        this.dialogRef = this.dialog.open(${variables.component?cap_first}AddDialogComponent);
+        this.dialogRef = this.dialog.open(${variables.entityName?cap_first}AddDialogComponent);
 
         this.dialogRef.afterClosed().subscribe(result => {
             if (result) {
@@ -160,7 +160,7 @@ export class ${variables.component?cap_first}DataGridComponent implements OnInit
     }
 
     openEditDialog(): void {
-        this.dialogRef = this.dialog.open(${variables.component?cap_first}AddDialogComponent, {
+        this.dialogRef = this.dialog.open(${variables.entityName?cap_first}AddDialogComponent, {
             data: this.selectedRow,
         });
 
