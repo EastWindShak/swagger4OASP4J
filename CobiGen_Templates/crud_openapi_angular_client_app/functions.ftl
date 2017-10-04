@@ -42,7 +42,7 @@
 <#macro getNG2Type_Grid_Search>
   <#list model.properties as property>
       <md-input-container style="width:100%;">
-        <input mdInput name ="${property.name}" type="${getType(OaspUtil.getOaspTypeFromOpenAPI(property, false, false))}" ngModel [placeholder]= "'${variables.component}datagrid.${variables.entityName}.columns.${property.name}' | translate">
+        <input mdInput name ="${property.name}" type="${getType(OaspUtil.getOaspTypeFromOpenAPI(property, false, false))}" ngModel [placeholder]= "'${variables.component}.${variables.entityName}.columns.${property.name}' | translate">
       </md-input-container>
    </#list>
 </#macro>
@@ -51,7 +51,7 @@
 <#macro getNG2Type_Add_Dialog>
   <#list model.properties as property>
     <md-input-container style="width:100%;">
-        <input mdInput type="${getType(OaspUtil.getOaspTypeFromOpenAPI(property, false, false))}" name = "${property.name}" [placeholder]= "'${variables.component}datagrid.${variables.entityName}.columns.${property.name}' | translate" [(ngModel)] = "items.${property.name}" required>
+        <input mdInput type="${getType(OaspUtil.getOaspTypeFromOpenAPI(property, false, false))}" name = "${property.name}" [placeholder]= "'${variables.component}.${variables.entityName}.columns.${property.name}' | translate" [(ngModel)] = "items.${property.name}" required>
     </md-input-container>
    </#list>
 </#macro>

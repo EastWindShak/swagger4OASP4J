@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { ITdDataTableColumn } from '@covalent/core';
 import { Injectable } from '@angular/core'
-import { HttpClient } from '../../shared/security/httpClient.service';
+import { HttpClient } from '../security/httpClient.service';
 import { BusinessOperations } from '../../BusinessOperations';
 
 @Injectable()

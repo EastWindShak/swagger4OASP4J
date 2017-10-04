@@ -2,9 +2,9 @@
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { ${variables.entityName?cap_first}DataGridComponent } from './${variables.component}dataGrid/${variables.entityName}dataGrid.component';
+import { ${variables.entityName?cap_first}DataGridComponent } from './${variables.component}/${variables.entityName?lower_case}/${variables.entityName}dataGrid.component';
 
-import { ${variables.entityName?cap_first}AddDialogComponent } from './${variables.component}dataGrid/${variables.entityName}addDialog/${variables.entityName}addDialog.component';
+import { ${variables.entityName?cap_first}AddDialogComponent } from './${variables.component}/${variables.entityName?lower_case}/${variables.entityName}addDialog/${variables.entityName}addDialog.component';
 import { HeaderComponent } from './header/header.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 
@@ -23,7 +23,7 @@ import 'hammerjs';
 
 // services
 import { BusinessOperations } from './BusinessOperations';
-import { ${variables.entityName?cap_first}DataGridService } from './${variables.component}dataGrid/shared/${variables.entityName}dataGrid.service';
+import { ${variables.entityName?cap_first}DataGridService } from './shared/services/${variables.entityName}dataGrid.service';
 import { HttpClient } from './shared/security/httpClient.service';
 import { LoginService } from './login/shared/login.service';
 import { AuthService } from './shared/security/auth.service';

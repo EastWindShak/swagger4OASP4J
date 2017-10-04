@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/security/auth.service';
+import { AuthService } from '../../shared/security/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ${variables.entityName?cap_first}AddDialogComponent } from './${variables.entityName}addDialog/${variables.entityName}addDialog.component';
 import { MdDialog, MdDialogRef } from '@angular/material';
@@ -12,7 +12,7 @@ import {
     TdDataTableComponent,
     TdDialogService
 } from '@covalent/core';
-import { ${variables.entityName?cap_first}DataGridService } from './shared/${variables.entityName}dataGrid.service';
+import { ${variables.entityName?cap_first}DataGridService } from '../../shared/services/${variables.entityName}dataGrid.service';
 import * as _ from 'lodash';
 
 @Component({
@@ -27,9 +27,9 @@ export class ${variables.entityName?cap_first}DataGridComponent implements OnIni
     data: any = [];
     columns: ITdDataTableColumn[] = [<#list model.properties as property>
       <#if property?has_next>
-      {name: '${property.name}', label: this.getTranslation('${variables.component}datagrid.${variables.entityName}.columns.${property.name}')},
+      {name: '${property.name}', label: this.getTranslation('${variables.component}.${variables.entityName}.columns.${property.name}')},
       <#else>
-      {name: '${property.name}', label: this.getTranslation('${variables.component}datagrid.${variables.entityName}.columns.${property.name}')}
+      {name: '${property.name}', label: this.getTranslation('${variables.component}.${variables.entityName}.columns.${property.name}')}
       </#if>
     </#list>];
 
@@ -74,7 +74,7 @@ export class ${variables.entityName?cap_first}DataGridComponent implements OnIni
 
         this.translate.onLangChange.subscribe(() => {
                 me.columns.forEach( column => {
-                    this.translate.get('${variables.component}datagrid.${variables.entityName}.columns.' + column.name).subscribe( (res) => {
+                    this.translate.get('${variables.component}.${variables.entityName}.columns.' + column.name).subscribe( (res) => {
                         column.label = res;
                     });
                 });
@@ -92,7 +92,7 @@ export class ${variables.entityName?cap_first}DataGridComponent implements OnIni
        }, (error) => {
             this._dialogService.openConfirm({
                 message: JSON.parse(error.text()).message,
-                title: this.getTranslation('${variables.component}datagrid.alert.title')
+                title: this.getTranslation('${variables.component}.alert.title')
             }).afterClosed().subscribe((accept: boolean) => {
               if (accept) {
                 this.authService.setLogged(false);
@@ -147,7 +147,7 @@ export class ${variables.entityName?cap_first}DataGridComponent implements OnIni
               }, (error) => {
                   this._dialogService.openAlert({
                       message: JSON.parse(error.text()).message,
-                      title: this.getTranslation('${variables.component}datagrid.alert.title')
+                      title: this.getTranslation('${variables.component}.alert.title')
                   }).afterClosed().subscribe((accept: boolean) => {
                     if (accept) {
                     this.authService.setLogged(false);
@@ -171,7 +171,7 @@ export class ${variables.entityName?cap_first}DataGridComponent implements OnIni
               }, (error) => {
                   this._dialogService.openAlert({
                       message: JSON.parse(error.text()).message,
-                      title: this.getTranslation('${variables.component}datagrid.alert.title')
+                      title: this.getTranslation('${variables.component}.alert.title')
                   }).afterClosed().subscribe((accept: boolean) => {
                       if (accept) {
                         this.authService.setLogged(false);
@@ -185,10 +185,10 @@ export class ${variables.entityName?cap_first}DataGridComponent implements OnIni
 
     openConfirm(): void {
         this._dialogService.openConfirm({
-            message: this.getTranslation('${variables.component}datagrid.alert.message'),
-            title: this.getTranslation('${variables.component}datagrid.alert.title'),
-            cancelButton: this.getTranslation('${variables.component}datagrid.alert.cancelBtn'),
-            acceptButton: this.getTranslation('${variables.component}datagrid.alert.acceptBtn'),
+            message: this.getTranslation('${variables.component}.alert.message'),
+            title: this.getTranslation('${variables.component}.alert.title'),
+            cancelButton: this.getTranslation('${variables.component}.alert.cancelBtn'),
+            acceptButton: this.getTranslation('${variables.component}.alert.acceptBtn'),
         }).afterClosed().subscribe((accept: boolean) => {
             if (accept) {
                 this.dataGridService.deleteData(this.selectedRow.id).subscribe( () => {
@@ -196,7 +196,7 @@ export class ${variables.entityName?cap_first}DataGridComponent implements OnIni
                 }, (error) => {
                     this._dialogService.openAlert({
                         message: JSON.parse(error.text()).message,
-                        title: this.getTranslation('${variables.component}datagrid.alert.title')
+                        title: this.getTranslation('${variables.component}.alert.title')
                     }).afterClosed().subscribe((acceptance: boolean) => {
                       if (acceptance) {
                         this.authService.setLogged(false);

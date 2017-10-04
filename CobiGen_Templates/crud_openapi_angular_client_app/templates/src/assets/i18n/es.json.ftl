@@ -21,7 +21,7 @@
     "errorMsg": "Nombre de usuario o contraseña incorrectos"
   },
   "home": "Inicio",
-  "${variables.component}datagrid": {
+  "${variables.component}": {
     "${variables.entityName}": {
     	"title": "${variables.entityName?cap_first}_ES grid",
     	"navData": "${variables.entityName}_ES",

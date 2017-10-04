@@ -1,6 +1,6 @@
 <#include '/functions.ftl'>
 <div layout="row" layout-align="start center" style="background-color:#eee">
-  <span flex class="md-title" style ="text-align: center">{{'${variables.component}datagrid.${variables.entityName}.title' | translate}}</span>
+  <span flex class="md-title" style ="text-align: center">{{'${variables.component}.${variables.entityName}.title' | translate}}</span>
 
   <button
     md-button

@@ -21,7 +21,7 @@
     "errorMsg": "Wrong username or password"
   },
   "home": "Home",
-  "${variables.component}datagrid": {
+  "${variables.component}": {
     "${variables.entityName}": {
     	"title": "${variables.entityName?cap_first}_EN grid",
     	"navData": "${variables.entityName}_EN",
