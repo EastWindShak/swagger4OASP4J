@@ -14,7 +14,6 @@
     <templateExtension ref="es.json" mergeStrategy="jsonmerge"/>
     <templateExtension ref="en.json" mergeStrategy="jsonmerge"/>
     <templateExtension ref="serverPath.ts" mergeStrategy="tsmerge_override"/>
-    <templateExtension ref="app.routing.ts" mergeStrategy="tsmerge"/>
   </templates>
 
   <templateScans>
@@ -38,7 +37,6 @@
       <templateRef ref="home.component.html"/>
       <templateRef ref="BusinessOperations.ts"/>
       <templateRef ref="app.module.ts"/>
-      <templateRef ref="app.routing.ts"/>
     </increment>
   </increments>
 </templatesConfiguration>

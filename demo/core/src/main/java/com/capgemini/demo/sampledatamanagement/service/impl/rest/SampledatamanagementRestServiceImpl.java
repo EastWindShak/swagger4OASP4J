@@ -5,10 +5,10 @@ import javax.inject.Named;
 
 import com.capgemini.demo.sampledatamanagement.common.api.SampleData;
 import com.capgemini.demo.sampledatamanagement.logic.api.Sampledatamanagement;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.RestaurantTableEto;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.RestaurantTableSearchCriteriaTo;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataEto;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataSearchCriteriaTo;
-import com.capgemini.demo.sampledatamanagement.logic.api.to.TableEto;
-import com.capgemini.demo.sampledatamanagement.logic.api.to.TableSearchCriteriaTo;
 import com.capgemini.demo.sampledatamanagement.service.api.rest.SampledatamanagementRestService;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
@@ -24,27 +24,28 @@ public class SampledatamanagementRestServiceImpl implements Sampledatamanagement
 	private Sampledatamanagement sampledatamanagement;
 
 	@Override
-	public TableEto getTable(long id) {
+	public RestaurantTableEto getRestaurantTable(long id) {
 
-		return this.sampledatamanagement.findTable(id);
+		return this.sampledatamanagement.findRestaurantTable(id);
 	}
 
 	@Override
-	public TableEto saveTable(TableEto table) {
+	public RestaurantTableEto saveRestaurantTable(RestaurantTableEto restauranttable) {
 
-		return this.sampledatamanagement.saveTable(table);
+		return this.sampledatamanagement.saveRestaurantTable(restauranttable);
 	}
 
 	@Override
-	public void deleteTable(long id) {
+	public void deleteRestaurantTable(long id) {
 
-		this.sampledatamanagement.deleteTable(id);
+		this.sampledatamanagement.deleteRestaurantTable(id);
 	}
 
 	@Override
-	public PaginatedListTo<TableEto> findTablesByPost(TableSearchCriteriaTo searchCriteriaTo) {
+	public PaginatedListTo<RestaurantTableEto> findRestaurantTablesByPost(
+			RestaurantTableSearchCriteriaTo searchCriteriaTo) {
 
-		return this.sampledatamanagement.findTableEtos(searchCriteriaTo);
+		return this.sampledatamanagement.findRestaurantTableEtos(searchCriteriaTo);
 	}
 
 	@Override

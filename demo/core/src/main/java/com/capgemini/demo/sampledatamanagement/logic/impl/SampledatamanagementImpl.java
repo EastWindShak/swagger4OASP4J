@@ -10,15 +10,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.demo.general.logic.base.AbstractComponentFacade;
+import com.capgemini.demo.sampledatamanagement.dataaccess.api.RestaurantTableEntity;
 import com.capgemini.demo.sampledatamanagement.dataaccess.api.SampleDataEntity;
-import com.capgemini.demo.sampledatamanagement.dataaccess.api.TableEntity;
+import com.capgemini.demo.sampledatamanagement.dataaccess.api.dao.RestaurantTableDao;
 import com.capgemini.demo.sampledatamanagement.dataaccess.api.dao.SampleDataDao;
-import com.capgemini.demo.sampledatamanagement.dataaccess.api.dao.TableDao;
 import com.capgemini.demo.sampledatamanagement.logic.api.Sampledatamanagement;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.RestaurantTableEto;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.RestaurantTableSearchCriteriaTo;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataEto;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataSearchCriteriaTo;
-import com.capgemini.demo.sampledatamanagement.logic.api.to.TableEto;
-import com.capgemini.demo.sampledatamanagement.logic.api.to.TableSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -35,10 +35,10 @@ public class SampledatamanagementImpl extends AbstractComponentFacade implements
 	private static final Logger LOG = LoggerFactory.getLogger(SampledatamanagementImpl.class);
 
 	/**
-	 * @see #getTableDao()
+	 * @see #getRestaurantTableDao()
 	 */
 	@Inject
-	private TableDao tableDao;
+	private RestaurantTableDao restauranttableDao;
 
 	/**
 	 * @see #getSampleDataDao()
@@ -55,49 +55,50 @@ public class SampledatamanagementImpl extends AbstractComponentFacade implements
 	}
 
 	@Override
-	public TableEto findTable(Long id) {
+	public RestaurantTableEto findRestaurantTable(Long id) {
 
-		LOG.debug("Get Table with id {} from database.", id);
-		return getBeanMapper().map(getTableDao().findOne(id), TableEto.class);
+		LOG.debug("Get RestaurantTable with id {} from database.", id);
+		return getBeanMapper().map(getRestaurantTableDao().findOne(id), RestaurantTableEto.class);
 	}
 
 	@Override
-	public PaginatedListTo<TableEto> findTableEtos(TableSearchCriteriaTo criteria) {
+	public PaginatedListTo<RestaurantTableEto> findRestaurantTableEtos(RestaurantTableSearchCriteriaTo criteria) {
 
 		criteria.limitMaximumPageSize(MAXIMUM_HIT_LIMIT);
-		PaginatedListTo<TableEntity> tables = getTableDao().findTables(criteria);
-		return mapPaginatedEntityList(tables, TableEto.class);
+		PaginatedListTo<RestaurantTableEntity> restauranttables = getRestaurantTableDao()
+				.findRestaurantTables(criteria);
+		return mapPaginatedEntityList(restauranttables, RestaurantTableEto.class);
 	}
 
 	@Override
-	public boolean deleteTable(Long tableId) {
+	public boolean deleteRestaurantTable(Long restauranttableId) {
 
-		TableEntity table = getTableDao().find(tableId);
-		getTableDao().delete(table);
-		LOG.debug("The table with id '{}' has been deleted.", tableId);
+		RestaurantTableEntity restauranttable = getRestaurantTableDao().find(restauranttableId);
+		getRestaurantTableDao().delete(restauranttable);
+		LOG.debug("The restauranttable with id '{}' has been deleted.", restauranttableId);
 		return true;
 	}
 
 	@Override
-	public TableEto saveTable(TableEto table) {
+	public RestaurantTableEto saveRestaurantTable(RestaurantTableEto restauranttable) {
 
-		Objects.requireNonNull(table, "table");
-		TableEntity tableEntity = getBeanMapper().map(table, TableEntity.class);
+		Objects.requireNonNull(restauranttable, "restauranttable");
+		RestaurantTableEntity restauranttableEntity = getBeanMapper().map(restauranttable, RestaurantTableEntity.class);
 
-		// initialize, validate tableEntity here if necessary
-		TableEntity resultEntity = getTableDao().save(tableEntity);
-		LOG.debug("Table with id '{}' has been created.", resultEntity.getId());
+		// initialize, validate restauranttableEntity here if necessary
+		RestaurantTableEntity resultEntity = getRestaurantTableDao().save(restauranttableEntity);
+		LOG.debug("RestaurantTable with id '{}' has been created.", resultEntity.getId());
 
-		return getBeanMapper().map(resultEntity, TableEto.class);
+		return getBeanMapper().map(resultEntity, RestaurantTableEto.class);
 	}
 
 	/**
-	 * Returns the field 'tableDao'.
+	 * Returns the field 'restauranttableDao'.
 	 *
-	 * @return the {@link TableDao} instance.
+	 * @return the {@link RestaurantTableDao} instance.
 	 */
-	public TableDao getTableDao() {
-		return this.tableDao;
+	public RestaurantTableDao getRestaurantTableDao() {
+		return this.restauranttableDao;
 	}
 
 	@Override

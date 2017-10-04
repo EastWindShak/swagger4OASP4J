@@ -1,9 +1,9 @@
 package com.capgemini.demo.sampledatamanagement.logic.api;
 
+import com.capgemini.demo.sampledatamanagement.logic.api.to.RestaurantTableEto;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.RestaurantTableSearchCriteriaTo;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataEto;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataSearchCriteriaTo;
-import com.capgemini.demo.sampledatamanagement.logic.api.to.TableEto;
-import com.capgemini.demo.sampledatamanagement.logic.api.to.TableSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -13,41 +13,44 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 public interface Sampledatamanagement {
 
 	/**
-	 * Returns a Table by its id 'id'.
+	 * Returns a RestaurantTable by its id 'id'.
 	 *
 	 * @param id
-	 *            The id 'id' of the Table.
-	 * @return The {@link TableEto} with id 'id'
+	 *            The id 'id' of the RestaurantTable.
+	 * @return The {@link RestaurantTableEto} with id 'id'
 	 */
-	TableEto findTable(Long id);
+	RestaurantTableEto findRestaurantTable(Long id);
 
 	/**
-	 * Returns a paginated list of Tables matching the search criteria.
+	 * Returns a paginated list of RestaurantTables matching the search
+	 * criteria.
 	 *
 	 * @param criteria
-	 *            the {@link TableSearchCriteriaTo}.
-	 * @return the {@link List} of matching {@link TableEto}s.
+	 *            the {@link RestaurantTableSearchCriteriaTo}.
+	 * @return the {@link List} of matching {@link RestaurantTableEto}s.
 	 */
-	PaginatedListTo<TableEto> findTableEtos(TableSearchCriteriaTo criteria);
+	PaginatedListTo<RestaurantTableEto> findRestaurantTableEtos(RestaurantTableSearchCriteriaTo criteria);
 
 	/**
-	 * Deletes a table from the database by its id 'tableId'.
+	 * Deletes a restaurantTable from the database by its id
+	 * 'restaurantTableId'.
 	 *
-	 * @param tableId
-	 *            Id of the table to delete
-	 * @return boolean <code>true</code> if the table can be deleted,
+	 * @param restaurantTableId
+	 *            Id of the restaurantTable to delete
+	 * @return boolean <code>true</code> if the restaurantTable can be deleted,
 	 *         <code>false</code> otherwise
 	 */
-	boolean deleteTable(Long tableId);
+	boolean deleteRestaurantTable(Long restaurantTableId);
 
 	/**
-	 * Saves a table and store it in the database.
+	 * Saves a restaurantTable and store it in the database.
 	 *
-	 * @param table
-	 *            the {@link TableEto} to create.
-	 * @return the new {@link TableEto} that has been saved with ID and version.
+	 * @param restaurantTable
+	 *            the {@link RestaurantTableEto} to create.
+	 * @return the new {@link RestaurantTableEto} that has been saved with ID
+	 *         and version.
 	 */
-	TableEto saveTable(TableEto table);
+	RestaurantTableEto saveRestaurantTable(RestaurantTableEto restaurantTable);
 
 	/**
 	 * Returns a SampleData by its id 'id'.

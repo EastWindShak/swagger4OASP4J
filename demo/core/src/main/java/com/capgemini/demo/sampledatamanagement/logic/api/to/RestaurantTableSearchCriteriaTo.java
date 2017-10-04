@@ -5,10 +5,10 @@ import io.oasp.module.jpa.common.api.to.SearchCriteriaTo;
 /**
  * This is the {@link SearchCriteriaTo search criteria}
  * {@link net.sf.mmm.util.transferobject.api.TransferObject TO} used to find
- * {@link com.capgemini.demo.sampledatamanagement.common.api.Table}s.
+ * {@link com.capgemini.demo.sampledatamanagement.common.api.RestaurantTable}s.
  *
  */
-public class TableSearchCriteriaTo extends SearchCriteriaTo {
+public class RestaurantTableSearchCriteriaTo extends SearchCriteriaTo {
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,7 +17,7 @@ public class TableSearchCriteriaTo extends SearchCriteriaTo {
 	/**
 	 * The constructor.
 	 */
-	public TableSearchCriteriaTo() {
+	public RestaurantTableSearchCriteriaTo() {
 
 		super();
 	}

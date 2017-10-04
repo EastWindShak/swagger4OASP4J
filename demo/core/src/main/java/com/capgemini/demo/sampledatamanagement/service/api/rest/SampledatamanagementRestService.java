@@ -14,10 +14,10 @@ import javax.ws.rs.core.MediaType;
 
 import com.capgemini.demo.sampledatamanagement.common.api.SampleData;
 import com.capgemini.demo.sampledatamanagement.logic.api.Sampledatamanagement;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.RestaurantTableEto;
+import com.capgemini.demo.sampledatamanagement.logic.api.to.RestaurantTableSearchCriteriaTo;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataEto;
 import com.capgemini.demo.sampledatamanagement.logic.api.to.SampleDataSearchCriteriaTo;
-import com.capgemini.demo.sampledatamanagement.logic.api.to.TableEto;
-import com.capgemini.demo.sampledatamanagement.logic.api.to.TableSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -31,48 +31,50 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 public interface SampledatamanagementRestService {
 
 	/**
-	 * Delegates to {@link Sampledatamanagement#findTable}.
+	 * Delegates to {@link Sampledatamanagement#findRestaurantTable}.
 	 *
 	 * @param id
-	 *            the ID of the {@link TableEto}
-	 * @return the {@link TableEto}
+	 *            the ID of the {@link RestaurantTableEto}
+	 * @return the {@link RestaurantTableEto}
 	 */
 	@GET
-	@Path("/table/{id}/")
-	public TableEto getTable(@PathParam("id") long id);
+	@Path("/restauranttable/{id}/")
+	public RestaurantTableEto getRestaurantTable(@PathParam("id") long id);
 
 	/**
-	 * Delegates to {@link Sampledatamanagement#saveTable}.
+	 * Delegates to {@link Sampledatamanagement#saveRestaurantTable}.
 	 *
-	 * @param table
-	 *            the {@link TableEto} to be saved
-	 * @return the recently created {@link TableEto}
+	 * @param restauranttable
+	 *            the {@link RestaurantTableEto} to be saved
+	 * @return the recently created {@link RestaurantTableEto}
 	 */
 	@POST
-	@Path("/table/")
-	public TableEto saveTable(@Valid TableEto table);
+	@Path("/restauranttable/")
+	public RestaurantTableEto saveRestaurantTable(@Valid RestaurantTableEto restauranttable);
 
 	/**
-	 * Delegates to {@link Sampledatamanagement#deleteTable}.
+	 * Delegates to {@link Sampledatamanagement#deleteRestaurantTable}.
 	 *
 	 * @param id
-	 *            ID of the {@link TableEto} to be deleted
+	 *            ID of the {@link RestaurantTableEto} to be deleted
 	 */
 	@DELETE
-	@Path("/table/{id}/")
-	public void deleteTable(@PathParam("id") long id);
+	@Path("/restauranttable/{id}/")
+	public void deleteRestaurantTable(@PathParam("id") long id);
 
 	/**
-	 * Delegates to {@link Sampledatamanagement#findTableEtos}.
+	 * Delegates to {@link Sampledatamanagement#findRestaurantTableEtos}.
 	 *
 	 * @param searchCriteriaTo
 	 *            the pagination and search criteria to be used for finding
-	 *            tables.
-	 * @return the {@link PaginatedListTo list} of matching {@link TableEto}s.
+	 *            restauranttables.
+	 * @return the {@link PaginatedListTo list} of matching
+	 *         {@link RestaurantTableEto}s.
 	 */
-	@Path("/table/search")
+	@Path("/restauranttable/search")
 	@POST
-	public PaginatedListTo<TableEto> findTablesByPost(@Valid TableSearchCriteriaTo searchCriteriaTo);
+	public PaginatedListTo<RestaurantTableEto> findRestaurantTablesByPost(
+			@Valid RestaurantTableSearchCriteriaTo searchCriteriaTo);
 
 	/**
 	 * Delegates to {@link Sampledatamanagement#findSampleData}.

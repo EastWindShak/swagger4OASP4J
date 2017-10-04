@@ -3,14 +3,14 @@ package com.capgemini.demo.sampledatamanagement.dataaccess.api;
 import javax.persistence.Entity;
 
 import com.capgemini.demo.general.dataaccess.api.ApplicationPersistenceEntity;
-import com.capgemini.demo.sampledatamanagement.common.api.Table;
+import com.capgemini.demo.sampledatamanagement.common.api.RestaurantTable;
 
 /**
  * sampledatamanagement
  */
 @Entity
 @javax.persistence.Table(name = "RestaurantTable")
-public class TableEntity extends ApplicationPersistenceEntity implements Table {
+public class RestaurantTableEntity extends ApplicationPersistenceEntity implements RestaurantTable {
 
 	private static final long serialVersionUID = 1L;
 

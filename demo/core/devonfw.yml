@@ -84,8 +84,8 @@ paths:
         - paginated
 components:
   schemas:
-    Table:
-      title: Table
+    RestaurantTable:
+      title: RestaurantTable
       description: sampledatamanagement
       type: object
       properties:
