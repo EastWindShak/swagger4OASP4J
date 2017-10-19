@@ -21,23 +21,25 @@
     "errorMsg": "Wrong username or password"
   },
   "home": "Home",
-  "${variables.component}datagrid": {
-    "navData": "${variables.etoName}_EN",
-    "navDataSub": "Grid of ${variables.etoName}_EN",
-    "title": "${variables.etoName?cap_first}_EN grid",
+  "${variables.component}": {
+    "${variables.etoName}": {
+      "navData": "${variables.etoName}_EN",
+      "navDataSub": "Grid of ${variables.etoName}_EN",
+      "title": "${variables.etoName?cap_first}_EN grid",
+      "columns": {
+        <#list pojo.fields as field>
+          <#if field?has_next>
+        "${field.name}": "${field.name?cap_first}_EN",
+          <#else>
+        "${field.name}": "${field.name?cap_first}_EN"
+          </#if>
+        </#list>
+      }
+    },
     "addTitle": "Add new item",
     "editTitle": "Edit item",
     "searchTip": "Search Panel",
     "sortTip": "Clear Sorting",
-    "columns": {
-      <#list pojo.fields as field>
-        <#if field?has_next>
-      "${field.name}": "${field.name?cap_first}_EN",
-        <#else>
-      "${field.name}": "${field.name?cap_first}_EN"
-        </#if>
-      </#list>
-    },
     "alert": {
       "title": "Confirm",
       "message": "Are you sure you want to delete this item?",

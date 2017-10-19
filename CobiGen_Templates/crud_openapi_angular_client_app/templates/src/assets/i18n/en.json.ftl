@@ -25,7 +25,7 @@
     "${variables.entityName}": {
     	"title": "${variables.entityName?cap_first}_EN grid",
     	"navData": "${variables.entityName}_EN",
-        "navDataSub": "Grid of ${variables.entityName}_EN",
+      "navDataSub": "Grid of ${variables.entityName}_EN",
     	"columns": {
         <#list model.properties as property>
           <#if property?has_next>

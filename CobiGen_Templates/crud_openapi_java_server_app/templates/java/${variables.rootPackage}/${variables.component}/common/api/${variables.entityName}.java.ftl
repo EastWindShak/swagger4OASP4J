@@ -8,12 +8,23 @@ public interface ${variables.entityName} extends ApplicationEntity {
 
 <#list model.properties as property>
 	<#if property.name != "id">
-		<#if !property.isCollection>
-	public void set<#if property.isEntity>${property.name?cap_first}Id<#else>${property.name?cap_first}</#if>(${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} <#if property.isEntity>${property.name}Id<#else>${property.name}</#if>);
+	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false)} ${property.name});
 	
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} get<#if property.isEntity>${property.name?cap_first}Id<#else>${property.name?cap_first}</#if>();
-		</#if>
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false)} <#if property.type == "boolean">is<#else>get</#if>${property.name?cap_first}();
 	</#if>
+</#list>
+
+<#list model.relationShips as rs>
+  <#if rs.sameComponent>
+  public <#if rs.type == "manytomany" || rs.type == "onetomany">List<${rs.entity}Entity><#else>${rs.entity}Entity</#if> get${rs.entity}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if> ();
+
+  public void set${rs.entity}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>(<#if rs.type == "manytomany" || rs.type == "onetomany">List<${rs.entity}Entity><#else>${rs.entity}Entity</#if> ${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>);
+  
+  <#else>
+  public <#if rs.type == "manytomany" || rs.type == "onetomany">List<Long><#else>Long</#if> get${rs.entity}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if> ();
+
+  public void set${rs.entity}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>(<#if rs.type == "manytomany" || rs.type == "onetomany">List<Long><#else>Long</#if> ${rs.entity?uncap_first}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>);
+  </#if>
 </#list>
 
 }

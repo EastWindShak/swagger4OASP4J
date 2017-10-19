@@ -51,71 +51,58 @@ public class ${variables.entityName?cap_first}Entity extends ApplicationPersiste
 		<#elseif property.constraints.maxLength?? && property.constraints.minLength??>
 	@Size(max = ${property.constraints.maxLength}, min = ${property.constraints.minLength})	
 		</#if>
-		<#if property.isEntity>
-			<#if property.sameComponent>
-	private ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)}Entity ${property.name};
-	  	<#else>
-	private ${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} ${property.name}Id;
-	  	</#if>
-    <#else>
-  private ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} ${property.name};   
-    </#if>
+	private ${OaspUtil.getOaspTypeFromOpenAPI(property, false)} ${property.name};
+	  
 	</#if>
+</#list>
+
+<#list model.relationShips as rs>
+  <#if rs.sameComponent>
+  private <#if rs.type == "manytomany" || rs.type == "onetomany">List<${rs.entity}Entity><#else>${rs.entity}Entity</#if> ${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>;
+  
+  <#else>
+  private <#if rs.type == "manytomany" || rs.type == "onetomany">List<Long><#else>Long</#if> ${rs.entity?uncap_first}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>;
+  
+  </#if>
 </#list>
 
 <#list model.properties as property>
 	<#if property.name != "id">
-		<#if property.isEntity && !property.sameComponent>
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} get${property.name?cap_first}Id() {
-		return this.${property.name}Id;
-	}
-	
-	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} ${property.name}Id) {
-		this.${property.name}Id = ${property.name}Id;
-	}
-		<#elseif property.isEntity && property.sameComponent>
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)}Entity get${property.name?cap_first}() {
-		return this.${property.name};
-	}
-	
-	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)}Entity ${property.name}) {
-		this.${property.name} = ${property.name};
-	}
-		<#elseif !property.isEntity>
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} get${property.name?cap_first}() {
-		return this.${property.name};
-	}
-	
-	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} ${property.name}) {
-		this.${property.name} = ${property.name};
-	}	
-		</#if>
-	</#if>
-	
-</#list>
-
-<#list model.properties as property>
-	<#if !property.isCollection && property.isEntity && property.sameComponent>
 	@Override
-	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} ${property.name}Id) {
-		if (${property.name}Id == null) {
-          this.${property.name} = null;
-        } else {
-          ${property.type}Entity ${property.type?uncap_first}Entity = new ${property.type}Entity();
-          ${property.type?uncap_first}Entity.setId(${property.name}Id);
-          this.${property.name} = ${property.type?uncap_first}Entity;
-        }
+	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false)} ${property.name}) {
+	  this.${property.name} = ${property.name};
 	}
 	
 	@Override
-	@Transient
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} get${property.name?cap_first}Id() {
-		if (this.${property.name} == null) {
-          return null;
-        }
-        return this.${property.name}.getId();
-	}
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false)} <#if property.type == "boolean">is<#else>get</#if>${property.name?cap_first}() {
+	  return this.${property.name};
+	} 
 	</#if>
 </#list>
 
+<#list model.relationShips as rs>
+  <#if rs.sameComponent>
+  @Override
+  ${OaspUtil.getRelationShipAnnotation(rs, variables.entityName)}
+  public <#if rs.type == "manytomany" || rs.type == "onetomany">List<${rs.entity}Entity><#else>${rs.entity}Entity</#if> get${rs.entity}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if> () {
+    return this.${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>;
+  }
+  
+  @Override
+  public void set${rs.entity}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>(<#if rs.type == "manytomany" || rs.type == "onetomany">List<${rs.entity}Entity><#else>${rs.entity}Entity</#if> ${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>) {
+    this.${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if> =  ${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>;
+  }
+  
+  <#else>
+  @Override
+  public <#if rs.type == "manytomany" || rs.type == "onetomany">List<Long><#else>Long</#if> get${rs.entity}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if> () {
+    return this.${rs.entity?uncap_first}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>;
+  }
+  
+  @Override
+  public void set${rs.entity}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>(<#if rs.type == "manytomany" || rs.type == "onetomany">List<Long><#else>Long</#if> ${rs.entity?uncap_first}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>) {
+    this.${rs.entity?uncap_first}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if> =  ${rs.entity?uncap_first}Id<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>;
+  }
+  </#if>
+</#list>
 }

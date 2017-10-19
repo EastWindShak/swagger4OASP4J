@@ -339,7 +339,7 @@ public class OaspUtil {
         return fieldType;
     }
     
-    public String getOaspTypeFromOpenAPI(Map<String, Object> parameter, boolean withIdRef, boolean simpleType) {
+    public String getOaspTypeFromOpenAPI(Map<String, Object> parameter, boolean simpleType) {
     	String typeConverted = null;
     	String format = (String)parameter.get("format");
     	String type = (String)parameter.get("type");
@@ -389,23 +389,13 @@ public class OaspUtil {
     				}
     			} else if(type.equals("string")) {
     				typeConverted =  "String";
-    			} else {
-    				if(isEntity) {
-    					if (withIdRef) {
-    						typeConverted = "Long";
-    					} else {
-    						typeConverted = type;    				    				
-    					}
-    				} else {
-    					typeConverted = type;
-    				}
     			}
     		}
     	} else {
     		return "void";
     	}
     	if (isCollection) {
-    		return "List<"+typeConverted+">";
+    	    return "List<"+typeConverted+">";    			
     	} else {
     		return typeConverted;
     	}
@@ -424,7 +414,7 @@ public class OaspUtil {
     }
     
     public String returnType(Map<String, Object> response) {
-    	String returnType = this.getOaspTypeFromOpenAPI(response, false, false);
+    	String returnType = this.getOaspTypeFromOpenAPI(response, false);
     	if ((boolean)response.get("isVoid")) {
     		return "void";
     	}
@@ -470,6 +460,58 @@ public class OaspUtil {
     		}    		
     	}
     	return consts;
+    }
+    
+    public String getSpringMediaType(String mediaType) {
+    	switch(mediaType) {
+    	case "application/xml":
+    		return "APPLICATION_XML_VALUE";
+    	case "application / x-www-form-urlencoded":
+    		return "APPLICATION_FORM_URLENCODED_VALUE";
+    	
+    	case "multipart/form-data":
+    		return "MULTIPART_FORM_DATA_VALUE";
+    	
+    	case "text/plain":
+    		return "TEXT_PLAIN_VALUE";
+    	
+    	case "text/html":
+    		return "TEXT_HTML_VALUE";
+    	
+    	case "application/pdf":
+    		return "APPLICATION_PDF_VALUE";
+    	
+    	case "image/png":
+    		return "IMAGE_PNG_VALUE";
+    	
+    	default:
+    		return "APPLICATION_JSON_VALUE";
+    	
+    	}
+    }
+    
+    public String getRelationShipAnnotation(Map<String, Object> rs, String entityName) {
+    	char c[] = ((String)rs.get("entity")).toCharArray();
+		c[0] = Character.toLowerCase(c[0]);
+		String ent = new String(c);
+		
+		c = entityName.toCharArray();
+		c[0] = Character.toLowerCase(c[0]);
+		String entName = new String(c);
+    	switch ((String)rs.get("type")) {
+		case "manytoone":	
+			return "@ManyToOne" + '\n' + "@JoinColumn(name = \"" + ent + "\")";
+		case "onetomany":
+			return "@OneToMany(mappedBy = \"" + entName + "\")";
+		case "onetoone":
+			return "@OneToOne" + '\n' + "@JoinColumn(name = \"" + ent + "\")";
+		case "manytomany":
+			return "@ManyToMany" + '\n' + 
+					"@JoinTable(name = \"" + entityName + (String)rs.get("entity") + "\", joinColumns = {" + '\n' +
+		            "@javax.persistence.JoinColumn(name = \""  + entName + "Id\") }, inverseJoinColumns = @javax.persistence.JoinColumn(name = \"" + ent + "Id\"))";
+		default:
+			return "";
+		}
     }
 
 }

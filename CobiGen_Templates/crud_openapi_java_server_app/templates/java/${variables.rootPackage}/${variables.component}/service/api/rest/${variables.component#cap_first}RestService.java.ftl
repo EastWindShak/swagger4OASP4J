@@ -8,7 +8,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import org.springframework.http.MediaType;
 
 import ${variables.rootPackage}.${variables.component}.logic.api.to.${variables.entityName?cap_first}Eto;
 import ${variables.rootPackage}.${variables.component}.logic.api.to.${variables.entityName?cap_first}SearchCriteriaTo;
@@ -19,8 +19,6 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
  * The service interface for REST calls in order to execute the logic of component {@link ${variables.component?cap_first}}.
  */
 @Path("${variables.component}/v1")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 public interface ${variables.component?cap_first}RestService {
 
   /**
@@ -31,6 +29,7 @@ public interface ${variables.component?cap_first}RestService {
    */
   @GET
   @Path("/${variables.entityName?lower_case}/{id}/")
+  @Produces(MediaType.APPLICATION_JSON_VALUE)
   public ${variables.entityName?cap_first}Eto get${variables.entityName?cap_first}(@PathParam("id") long id);
   
   /**
@@ -41,6 +40,8 @@ public interface ${variables.component?cap_first}RestService {
    */
   @POST
   @Path("/${variables.entityName?lower_case}/")
+  @Produces(MediaType.APPLICATION_JSON_VALUE)
+  @Consumes(MediaType.APPLICATION_JSON_VALUE)
   public ${variables.entityName?cap_first}Eto save${variables.entityName?cap_first}(@Valid ${variables.entityName?cap_first}Eto ${variables.entityName?lower_case});
 
   /**
@@ -60,6 +61,8 @@ public interface ${variables.component?cap_first}RestService {
    */
   @Path("/${variables.entityName?lower_case}/search")
   @POST
+  @Produces(MediaType.APPLICATION_JSON_VALUE)
+  @Consumes(MediaType.APPLICATION_JSON_VALUE)
   public PaginatedListTo<${variables.entityName?cap_first}Eto> find${variables.entityName?cap_first}sByPost(@Valid ${variables.entityName?cap_first}SearchCriteriaTo searchCriteriaTo);
   
 <#list model.component.paths as path>
@@ -76,6 +79,14 @@ public interface ${variables.component?cap_first}RestService {
   			</#if>
   @Path("${path.pathURI}")
   			<#assign returnType = OaspUtil.returnType(operation.response)>
+  <#list operation.parameters as parameter>
+    <#if parameter.mediaType??>
+ @Consumes(MediaType.${OaspUtil.getSpringMediaType(parameter.mediaType)})
+  	</#if>
+  </#list>
+  <#if operation.response.mediaType??>
+  @Produces(MediaType.${OaspUtil.getSpringMediaType(operation.response.mediaType)})
+  </#if>
   public ${returnType?replace("Entity", "Eto")} ${operation.operationId}(
     <#list operation.parameters as parameter>
     	<#if parameter.inPath>

@@ -11,7 +11,7 @@
         <p md-line> {{'${variables.component}.${variables.entityName}.navHomeSub' | translate}} </p>
       </a>
 
-      <a id="${variables.entityName}" md-list-item [routerLink]="['./${variables.entityName}']">
+      <a id="${variables.entityName}" md-list-item [routerLink]="['./${variables.entityName?lower_case}']">
         <md-icon md-list-avatar>grid_on</md-icon>
         <h3 md-line> {{'${variables.component}.${variables.entityName}.navData' | translate}} </h3>
         <p md-line> {{'${variables.component}.${variables.entityName}.navDataSub' | translate}} </p>
