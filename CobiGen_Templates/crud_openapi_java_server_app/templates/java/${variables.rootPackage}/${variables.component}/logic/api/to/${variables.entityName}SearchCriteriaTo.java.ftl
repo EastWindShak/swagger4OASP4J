@@ -16,8 +16,13 @@ public class ${variables.entityName}SearchCriteriaTo extends SearchCriteriaTo {
 <#list model.properties as property>
 	<#if property.name != "id">
 		<#if !property.isCollection>
-	private ${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} <#if property.isEntity>${property.name}Id<#else>${property.name}</#if>;
+	private ${OaspUtil.getOaspTypeFromOpenAPI(property, false)} ${property.name};
 		</#if>
+	</#if>
+</#list>
+<#list model.relationShips as rs>
+	<#if rs.type != "manytomany" && rs.type != "onetomany">
+    private Long ${rs.entity?uncap_first}Id;
 	</#if>
 </#list>
 
@@ -32,11 +37,11 @@ public class ${variables.entityName}SearchCriteriaTo extends SearchCriteriaTo {
 <#list model.properties as property>
 	<#if property.name != "id">
 		<#if !property.isCollection && !property.isEntity>
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} get${property.name?cap_first}() {
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false)} get${property.name?cap_first}() {
 		return this.${property.name};
 	}
 	
-	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} ${property.name}) {
+	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false)} ${property.name}) {
 		this.${property.name} = ${property.name};
 	}
 		</#if>
@@ -45,15 +50,27 @@ public class ${variables.entityName}SearchCriteriaTo extends SearchCriteriaTo {
 
 <#list model.properties as property>
 	<#if !property.isCollection && property.isEntity>
-	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} ${property.name}Id) {
+	public void set${property.name?cap_first}Id(${OaspUtil.getOaspTypeFromOpenAPI(property, false)} ${property.name}Id) {
 		this.${property.name}Id = ${property.name}Id;
 	}
 	
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, true, false)} get${property.name?cap_first}Id() {
+	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false)} get${property.name?cap_first}Id() {
         return this.${property.name}Id;
 	}
 	<#else>
 	
+	</#if>
+</#list>
+
+<#list model.relationShips as rs>
+	<#if rs.type != "manytomany" && rs.type != "onetomany">
+    public void set${rs.entity}Id(Long ${rs.entity?uncap_first}Id) {
+      this.${rs.entity?uncap_first}Id = ${rs.entity?uncap_first}Id;
+	}
+
+	public Long get${rs.entity}Id() {
+		return this.${rs.entity?uncap_first}Id;
+	}
 	</#if>
 </#list>
 

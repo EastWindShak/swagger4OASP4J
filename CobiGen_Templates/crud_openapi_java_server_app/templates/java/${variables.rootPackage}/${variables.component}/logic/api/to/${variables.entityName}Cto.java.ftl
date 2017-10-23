@@ -15,12 +15,12 @@ public class ${variables.entityName}Cto extends AbstractCto {
 
 	private ${variables.entityName}Eto ${variables.entityName?uncap_first};
 
-<#list model.properties as property>
-<#if property.isEntity>
-   	private ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)}<#if !property.isCollection>Eto</#if> ${property.name};
-</#if>
-</#list>
+<#list model.relationShips as rs>
+   <#if rs.sameComponent>
+   	private <#if rs.type == "manytomany" || rs.type == "onetomany">List<${rs.entity}Eto><#else>${rs.entity}Eto</#if> ${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>;
 
+   </#if>   
+</#list>
 	public ${variables.entityName} get${variables.entityName}() {
 		return ${variables.entityName?uncap_first};
 	}
@@ -29,16 +29,16 @@ public class ${variables.entityName}Cto extends AbstractCto {
 		this.${variables.entityName?uncap_first} = ${variables.entityName?uncap_first};
 	}
 
-<#list model.properties as property>
-	<#if property.isEntity>
-	public ${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)} get${property.name?cap_first}() {
-		return this.${property.name};
+<#list model.relationShips as rs>
+	<#if rs.sameComponent>
+	public <#if rs.type == "manytomany" || rs.type == "onetomany">List<${rs.entity}Eto> get${rs.entity}s<#else>${rs.entity}Eto get${rs.entity}</#if>() {
+		return this.${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>;
 	}
 	
-	public void set${property.name?cap_first}(${OaspUtil.getOaspTypeFromOpenAPI(property, false, false)}<#if property.isEntity && !property.isCollection>Eto</#if> ${property.name}) {
-		this.${property.name} = ${property.name};
+	public void <#if rs.type == "manytomany" || rs.type == "onetomany">set${rs.entity}s(List<${rs.entity}Eto> ${rs.entity?uncap_first}s<#else> set${rs.entity}(${rs.entity}Eto ${rs.entity?uncap_first}</#if>) {
+		this.${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if> = ${rs.entity?uncap_first}<#if rs.type == "manytomany" || rs.type == "onetomany">s</#if>;
 	}
 	</#if>
-	
 </#list>
+
 }

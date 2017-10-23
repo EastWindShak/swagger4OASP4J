@@ -107,11 +107,11 @@ public class ${variables.component?cap_first}Impl extends AbstractComponentFacad
   			</#if>
   			<#list operation.parameters as parameter>
   				<#if parameter.isSearchCriteria>
-  			${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}SearchCriteriaTo criteria<#if parameter?has_next>, <#else>) {</#if>
+  			${OaspUtil.getOaspTypeFromOpenAPI(parameter, false)}SearchCriteriaTo criteria<#if parameter?has_next>, <#else>) {</#if>
   				<#elseif parameter.isEntity>
-  		    ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}Eto ${parameter.name?replace("Entity","")}<#if parameter?has_next>, <#else>) {</#if>
+  		    ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false)}Eto ${parameter.name?replace("Entity","")}<#if parameter?has_next>, <#else>) {</#if>
   		    	<#else>
-  		    ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)} ${parameter.name}<#if parameter?has_next>, <#else>) {</#if>
+  		    ${OaspUtil.getOaspTypeFromOpenAPI(parameter, true)} ${parameter.name}<#if parameter?has_next>, <#else>) {</#if>
   		    	</#if>
   			</#list>
   		// TODO ${operation.operationId}

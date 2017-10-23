@@ -347,7 +347,9 @@ public class OaspUtil {
     	if(parameter.get("isCollection") != null) {
     		isCollection = (boolean)parameter.get("isCollection");    		
     	}
+    	
     	boolean isEntity = (boolean)parameter.get("isEntity");
+    	
 
     	if(type != null) {
     		if(format != null) {
@@ -395,8 +397,15 @@ public class OaspUtil {
     		return "void";
     	}
     	if (isCollection) {
-    	    return "List<"+typeConverted+">";    			
+    		if(isEntity) {
+    			return "List<"+parameter.get("type")+">";    			    			
+    		}else{
+    			return "List<"+typeConverted+">";
+    		}
     	} else {
+    		if(isEntity) {
+    			return (String) parameter.get("type");
+    		}
     		return typeConverted;
     	}
     }
@@ -502,7 +511,12 @@ public class OaspUtil {
 		case "manytoone":	
 			return "@ManyToOne" + '\n' + "@JoinColumn(name = \"" + ent + "\")";
 		case "onetomany":
-			return "@OneToMany(mappedBy = \"" + entName + "\")";
+			System.out.println(rs.get("unidirectional"));
+			if((boolean)rs.get("unidirectional")){
+				return "@OneToMany" + "\n" + "@JoinColumn(name = \"" + entName + "Id\")";				
+			} else {
+				return "@OneToMany(mappedBy = \"" + entName + "\")";
+			}
 		case "onetoone":
 			return "@OneToOne" + '\n' + "@JoinColumn(name = \"" + ent + "\")";
 		case "manytomany":

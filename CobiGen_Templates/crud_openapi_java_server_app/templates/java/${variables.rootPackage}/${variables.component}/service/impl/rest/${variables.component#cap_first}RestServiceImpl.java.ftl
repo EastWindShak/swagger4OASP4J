@@ -51,11 +51,11 @@ public class ${variables.component?cap_first}RestServiceImpl implements ${variab
   public ${returnType?replace("Entity", "Eto")} ${operation.operationId}(
   			<#list operation.parameters as parameter>
   				<#if parameter.isSearchCriteria>
-  			${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}SearchCriteriaTo criteria<#if parameter?has_next>, </#if>
+  			${OaspUtil.getOaspTypeFromOpenAPI(parameter, false)}SearchCriteriaTo criteria<#if parameter?has_next>, </#if>
   				<#elseif parameter.isEntity>
-  		  ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, false)}Eto ${parameter.name?replace("Entity","")}<#if parameter?has_next>, </#if>
+  		  ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false)}Eto ${parameter.name?replace("Entity","")}<#if parameter?has_next>, </#if>
   		    <#else>
-  		  ${OaspUtil.getOaspTypeFromOpenAPI(parameter, false, true)} ${parameter.name}<#if parameter?has_next>, </#if>
+  		  ${OaspUtil.getOaspTypeFromOpenAPI(parameter, true)} ${parameter.name}<#if parameter?has_next>, </#if>
   		   	</#if>
  				</#list>
   			) {
